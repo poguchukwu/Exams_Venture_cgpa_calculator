@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>(function(){var t=localStorage.getItem('ev-theme')||'dark';document.documentElement.setAttribute('data-theme',t);})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Exams Venture | Official CGPA Calculator & Exam Target Setter</title>
+    <meta name="description" content="The ultimate CGPA Calculator for all Nigerian Universities (4.0 & 5.0 scale). Track JAMB, WAEC, NECO, GCE, SAT scores and Post-UTME targets offline.">
+    <meta name="keywords" content="CGPA Calculator, Nigeria University Grading System, 5.0 CGPA Scale, 4.0 CGPA Scale, JAMB Result Checker, WAEC Score Grade, NECO Result Calculator, SAT Nigeria, Post-UTME Target, Calculate GP, Carryover Tracker, 100 Level Exams, Engineering CGPA, Medical Student GP, UNILAG, UI, OAU, UNIBEN, UNN, LASU, BUK">
+
+    <meta property="og:title" content="Exams Venture: Nigeria's #1 Student Academic Tool">
+    <meta property="og:description" content="Calculate your CGPA, set exam targets, and track your academic growth offline. For University, JAMB, and SSCE students.">
+    <meta property="og:image" content="logo4.png">
+    <meta property="og:type" content="website">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Exams Venture",
+      "operatingSystem": "Android, iOS, Windows",
+      "applicationCategory": "EducationApplication",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "ratingCount": "1000"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "NGN"
+      }
+    }
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exams Venture | Select Scale</title>
+    <link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#fbbf24">
+<link rel="apple-touch-icon" href="/icon-192.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0b0e14;
+            --card: rgba(22, 27, 34, 0.7);
+            --accent: #fbbf24; /* Your UI/EEE Gold */
+            --text: #ffffff;
+            --glass-border: rgba(251, 191, 36, 0.2);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg);
+            /* Subtle animated gradient background for depth */
+            background: radial-gradient(circle at top right, #1e293b 0%, #0b0e14 100%);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--accent);
+            letter-spacing: -1px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #8b949e;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        .selection-grid {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            max-width: 600px;
+            width: 90%;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        .scale-card {
+            flex: 1;
+            background: var(--card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px 20px;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Hover Effects */
+        .scale-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 
+                        0 0 15px rgba(251, 191, 36, 0.1);
+            background: rgba(30, 41, 59, 0.8);
+        }
+
+        .scale-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(251, 191, 36, 0.05) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .scale-card:hover::after { opacity: 1; }
+
+        .scale-num {
+            display: block;
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .scale-label {
+            display: block;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #f0f6fc;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .scale-desc {
+            display: block;
+            margin-top: 8px;
+            font-size: 0.8rem;
+            color: #8b949e;
+        }
+
+        .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(251, 191, 36, 0.1);
+            color: var(--accent);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            border: 1px solid var(--glass-border);
+        }
+
+        .footer-note {
+            margin-top: 50px;
+            font-size: 0.75rem;
+            color: #484f58;
+            letter-spacing: 0.5px;
+            opacity: 0.7;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 480px) {
+            .selection-grid { flex-direction: column; }
+            .scale-card { padding: 30px 20px; }
+            .logo { font-size: 1.8rem; }
+        }
+        /* Light theme */
+        [data-theme="light"] body { background: #f0f2f5; color: #1a1a1a; }
+        [data-theme="light"] .subtitle { color: #5f6368; }
+        [data-theme="light"] .scale-card { background: rgba(255,255,255,0.9); border-color: rgba(0,0,0,0.1); }
+        [data-theme="light"] .scale-card:hover { background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        [data-theme="light"] .scale-desc { color: #5f6368; }
+        [data-theme="light"] .footer-note { color: #5f6368; }
+        .theme-toggle-link { position: fixed; top: 15px; right: 15px; padding: 8px 14px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: var(--accent); font-size: 0.8rem; cursor: pointer; text-decoration: none; z-index: 100; }
+        .theme-toggle-link:hover { background: rgba(251,191,36,0.2); }
+        [data-theme="light"] .theme-toggle-link { background: rgba(0,0,0,0.05); border-color: #e0e0e0; color: #b45309; }
+    </style>
+</head>
+<body>
+
+    <div class="header-section">
+        <div class="logo">Exams Venture <br>CGPA Calculator</div>
+        <p class="subtitle">Choose your academic grading system</p>
+    </div>
+
+    <div class="selection-grid">
+        <a href="calculator.html?scale=4.0" class="scale-card">
+            <span class="scale-num">4.0</span>
+            <span class="scale-label"></span>
+            <span class="scale-desc">4-Point Grade Scale</span>
+        </a>
+
+        <a href="calculator.html?scale=5.0" class="scale-card">
+            <span class="scale-num">5.0</span>
+            <span class="scale-label"></span>
+            <span class="scale-desc">5-Point Grade Scale</span>
+        </a>
+    </div>
+
+    <div class="footer-note">Designed for Nigerian University Standards</div>
+    <a href="#" class="theme-toggle-link" onclick="evToggleTheme();return false;" id="choice-theme-btn">☀️ Light</a>
+
+<script>
+      function evToggleTheme(){
+        var c=document.documentElement.getAttribute('data-theme')||'dark';
+        var n=c==='dark'?'light':'dark';
+        document.documentElement.setAttribute('data-theme',n);
+        localStorage.setItem('ev-theme',n);
+        document.getElementById('choice-theme-btn').textContent=n==='dark'?'☀️ Light':'🌙 Dark';
+      }
+      (function(){var t=localStorage.getItem('ev-theme')||'dark';var b=document.getElementById('choice-theme-btn');if(b)b.textContent=t==='dark'?'☀️ Light':'🌙 Dark';})();
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(reg => console.log('Exams Venture PWA: Active'))
+            .catch(err => console.log('PWA Registration Failed: ', err));
+        });
+      }
+    </script>
+    
+</body>
+</html>
