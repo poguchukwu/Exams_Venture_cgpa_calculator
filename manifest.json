@@ -1,7 +1,7 @@
 {
   "name": "Exams Venture CGPA",
   "short_name": "ExamVenture",
-  "start_url": "/choice_scale.html",
+  "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#0b0e14",
   "theme_color": "#fbbf24",
