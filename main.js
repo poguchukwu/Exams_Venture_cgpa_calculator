@@ -252,7 +252,7 @@ function updateDashboard() {
 
     let degreeClass = "Pass";
     let nextBoundary = config.maxGPA;
-    let boundaryName = `Perfect ${config.maxGPA}`;
+    let boundaryName = `Max GPA`;
 
     for (const boundary of config.boundaries) {
         if (cgpa >= boundary.threshold) {
@@ -569,7 +569,7 @@ function calculateTarget() {
     html += `
         <div style="background:#161b22; padding:12px; border-radius:12px; margin:16px 0; border:1px solid #30363d;">
             <h4 style="color:var(--accent); font-size:0.9rem; margin-bottom:10px;">⚡ SMART ANALYTICS DASHBOARD</h4>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; font-size:0.75rem;">
+            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; font-size:0.75rem;">
                 <div style="background:rgba(52,211,153,0.05); padding:8px; border-radius:8px; border-left:2px solid ${velocityColor};">
                     <small style="color:var(--text-dim); display:block;">Performance Trend</small>
                     <b style="color:${velocityColor};">${gpaVelocity}</b>
@@ -581,10 +581,6 @@ function calculateTarget() {
                 <div style="background:rgba(139,166,246,0.05); padding:8px; border-radius:8px; border-left:2px solid #8ba6f6;">
                     <small style="color:var(--text-dim); display:block;">Success Probability</small>
                     <b style="color:#8ba6f6;">${Math.round(successProbability)}% Likely ✓</b>
-                </div>
-                <div style="background:rgba(255,191,0,0.05); padding:8px; border-radius:8px; border-left:2px solid #fbbf24;">
-                    <small style="color:var(--text-dim); display:block;">Avg Performance</small>
-                    <b style="color:#fbbf24;">${avgGPA.toFixed(2)} / ${config.maxGPA}</b>
                 </div>
             </div>
         </div>
@@ -708,7 +704,7 @@ function calculateTarget() {
         if(weakSubjectCodes.length > 0) {
             html += `
                 <div style="margin-bottom:10px;">
-                    <small style="color:var(--text-dim); display:block; margin-bottom:4px;">⚠️ Subjects Needing Improvement:</small>
+                    <small style="color:var(--text-dim); display:block; margin-bottom:4px;">⚠️ Subjects That Needed Improvement:</small>
                     <p style="margin:0; font-size:0.8rem; color:#ff6b6b;"><b>${weakSubjectCodes.join(', ')}</b><br><small>These courses historically challenged you. Plan extra study time.</small></p>
                 </div>
             `;
@@ -1387,6 +1383,14 @@ window.addEventListener('DOMContentLoaded', async () => {
     
     updateDashboard();
     updateRemainingUnitsDisplay();
+
+    const switchScaleLink = document.getElementById('scale-switch-link');
+    if (switchScaleLink) {
+        const targetScale = ACTIVE_SCALE === '4.0' ? '5.0' : '4.0';
+        switchScaleLink.href = `calculator.html?scale=${targetScale}`;
+        switchScaleLink.textContent = `Switch to ${targetScale} scale`;
+        switchScaleLink.title = `Open the ${targetScale} calculator`; 
+    }
 });
 
 // ===== GOOGLE ADSENSE USER-ACTION MODEL =====
