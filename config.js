@@ -27,11 +27,11 @@ const SCALE_CONFIG = {
         gradeMap: { "4": "A", "3": "B", "2": "C", "1": "D", "0": "F" },
         colors: { "4": "#4caf50", "3": "#2196f3", "2": "#ffc107", "1": "#ff9800", "0": "#9e9e9e" },
         boundaries: [
-            { threshold: 3.5, label: 'First Class', nextThreshold: 4.0, nextLabel: 'Max GPA' },
-            { threshold: 3.0, label: '2nd Class Upper', nextThreshold: 3.5, nextLabel: 'First Class' },
-            { threshold: 2.0, label: '2nd Class Lower', nextThreshold: 3.0, nextLabel: '2nd Class Upper' },
-            { threshold: 1.0, label: 'Third Class', nextThreshold: 2.0, nextLabel: '2nd Class Lower' },
-            { threshold: 0, label: 'Pass', nextThreshold: 1.0, nextLabel: 'Third Class' }
+            { threshold: 3.5, label: 'First Class', shortLabel: 'FC', nextThreshold: 4.0, nextLabel: 'Max GPA', nextShortLabel: 'MAX' },
+            { threshold: 3.0, label: '2nd Class Upper', shortLabel: '2.1', nextThreshold: 3.5, nextLabel: 'First Class', nextShortLabel: 'FC' },
+            { threshold: 2.0, label: '2nd Class Lower', shortLabel: '2.2', nextThreshold: 3.0, nextLabel: '2nd Class Upper', nextShortLabel: '2.1' },
+            { threshold: 1.0, label: 'Third Class', shortLabel: 'TC', nextThreshold: 2.0, nextLabel: '2nd Class Lower', nextShortLabel: '2.2' },
+            { threshold: 0, label: 'Pass', shortLabel: 'P', nextThreshold: 1.0, nextLabel: 'Third Class', nextShortLabel: 'TC' }
         ],
         totalDegreeUnits: 120,
         chartMaxY: 4,
@@ -62,11 +62,11 @@ const SCALE_CONFIG = {
         gradeMap: { "5": "A", "4": "B", "3": "C", "2": "D", "1": "E", "0": "F" },
         colors: { "5": "#4caf50", "4": "#2196f3", "3": "#ffc107", "2": "#ff9800", "1": "#f44336", "0": "#9e9e9e" },
         boundaries: [
-            { threshold: 4.5, label: 'First Class', nextThreshold: 5.0, nextLabel: 'Max GPA' },
-            { threshold: 3.5, label: '2nd Class Upper', nextThreshold: 4.5, nextLabel: 'First Class' },
-            { threshold: 2.49, label: '2nd Class Lower', nextThreshold: 3.5, nextLabel: '2nd Class Upper' },
-            { threshold: 1.5, label: 'Third Class', nextThreshold: 2.49, nextLabel: '2nd Class Lower' },
-            { threshold: 0, label: 'Pass', nextThreshold: 1.5, nextLabel: 'Third Class' }
+            { threshold: 4.5, label: 'First Class', shortLabel: 'FC', nextThreshold: 5.0, nextLabel: 'Max GPA', nextShortLabel: 'MAX' },
+            { threshold: 3.5, label: '2nd Class Upper', shortLabel: '2.1', nextThreshold: 4.5, nextLabel: 'First Class', nextShortLabel: 'FC' },
+            { threshold: 2.49, label: '2nd Class Lower', shortLabel: '2.2', nextThreshold: 3.5, nextLabel: '2nd Class Upper', nextShortLabel: '2.1' },
+            { threshold: 1.5, label: 'Third Class', shortLabel: 'TC', nextThreshold: 2.49, nextLabel: '2nd Class Lower', nextShortLabel: '2.2' },
+            { threshold: 0, label: 'Pass', shortLabel: 'P', nextThreshold: 1.5, nextLabel: 'Third Class', nextShortLabel: 'TC' }
         ],
         totalDegreeUnits: 200,
         chartMaxY: 5,
