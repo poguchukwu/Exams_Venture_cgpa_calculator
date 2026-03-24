@@ -4,6 +4,7 @@
     <script>(function(){var t=localStorage.getItem('ev-theme')||'dark';document.documentElement.setAttribute('data-theme',t);})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="logo4.png">
     <title>About | Exams Venture</title>
     <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#fbbf24">
@@ -161,11 +162,18 @@
         </div>
 
         <div class="action-area">
-            <a href="index.html" class="btn-back">Back to Calculator</a>
+            <a href="index.html" class="btn-back" id="btn-back">Back to Calculator</a>
             <div class="footer-brand">
                 Part of the <strong>Exams Venture</strong> Ecosystem
             </div>
         </div>
+    <script>
+        (function(){
+            const scale = localStorage.getItem('ev-scale') || '5.0';
+            const back = document.getElementById('btn-back');
+            if (back) back.href = `calculator.html?scale=${scale}`;
+        })();
+    </script>
     </div>
 
 </body>
