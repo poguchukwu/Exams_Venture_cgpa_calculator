@@ -280,6 +280,15 @@ function updateDashboard() {
         `;
     }
 
+    const cgpaCard = document.getElementById('current-cgpa-card');
+    if (cgpaCard) {
+        cgpaCard.style.cursor = 'pointer';
+        cgpaCard.title = 'Open CGPA Calculator';
+        cgpaCard.onclick = () => {
+            switchView('view-calc');
+        };
+    }
+
     renderAcademicHistory();
     renderGpaTrendChart();
     renderGradeDistributionChart();
@@ -1119,6 +1128,8 @@ function onboardingSkip() {
 }
 
 window.onload = function() {
+    localStorage.setItem('ev-scale', ACTIVE_SCALE);
+
     initTheme();
     populateSemesters();
     updateDashboard();
@@ -1366,10 +1377,13 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
     
     const config = getConfig();
-    if (localStorage.getItem(getStorageKey('pin'))) {
-        const instruction = document.getElementById('login-instruction');
-        if (instruction) {
+    const savedPin = localStorage.getItem(getStorageKey('pin'));
+    const instruction = document.getElementById('login-instruction');
+    if (instruction) {
+        if (savedPin) {
             instruction.innerText = `Enter your secret ${ACTIVE_SCALE} PIN to continue`;
+        } else {
+            instruction.innerText = `First time here? Create a 4-digit PIN to secure your ${ACTIVE_SCALE} data.`;
         }
     }
 
