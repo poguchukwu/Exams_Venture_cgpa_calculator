@@ -4,6 +4,7 @@
     <script>(function(){var t=localStorage.getItem('ev-theme')||'dark';document.documentElement.setAttribute('data-theme',t);})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="logo4.png">
     <title>Privacy Policy - Exams Venture</title>
     <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#fbbf24">
@@ -83,6 +84,13 @@
         <p>If you have questions about this policy, you can reach out to the Exams Venture development team through our official channels.</p>
         <a href="https://wa.me/qr/MHSRA5DBU5XSF1" target="_blank" style="color:var(--accent);">Contact Us on WhatsApp</a>
     </div>
+    <script>
+        (function(){
+            const scale = localStorage.getItem('ev-scale') || '5.0';
+            const back = document.querySelector('.back-btn');
+            if (back) back.href = `calculator.html?scale=${scale}`;
+        })();
+    </script>
 
 </body>
 </html>
