@@ -95,7 +95,7 @@ function renderCourseRow(code = '', unit = '', grade = '') {
     
     row.innerHTML = `
         <input type="text" placeholder="Course" class="inp-code" value="${code}">
-        <input type="number" placeholder="Unit" class="inp-unit" value="${unit}">
+        <input type="text" inputmode="decimal" placeholder="Unit" class="inp-unit" value="${unit}" pattern="[0-9]*">
         <select class="inp-grade">
             ${gradeOptions}
         </select>
