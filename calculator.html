@@ -2,179 +2,400 @@
 <html lang="en">
 <head>
     <script>(function(){var t=localStorage.getItem('ev-theme')||'dark';document.documentElement.setAttribute('data-theme',t);})();</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="logo4.png">
-    <title>About | Exams Venture</title>
+    <title>Exams Venture | Official CGPA Calculator & Exam Target Setter</title>
+    <meta name="description" content="The ultimate CGPA Calculator for all Nigerian Universities (4.0 & 5.0 scale). Track JAMB, WAEC, NECO, GCE, SAT scores and Post-UTME targets offline. Supports both 4.0 and 5.0 GPA scales.">
+    <meta name="keywords" content="CGPA Calculator, Nigeria University Grading System, 5.0 CGPA Scale, 4.0 CGPA Scale, JAMB Result Checker, WAEC Score Grade, NECO Result Calculator, SAT Nigeria, Post-UTME Target, Calculate GP, Carryover Tracker, 100 Level Exams, Engineering CGPA, Medical Student GP, UNILAG, UI, OAU, UNIBEN, UNN, LASU, BUK">
+
+    <meta property="og:title" content="Exams Venture: Nigeria's #1 Student Academic Tool">
+    <meta property="og:description" content="Calculate your CGPA, set exam targets, and track your academic growth offline. For University, JAMB, and SSCE students. Supports both 4.0 and 5.0 scales.">
+    <meta property="og:image" content="logo4.png">
+    <meta property="og:type" content="website">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Exams Venture",
+      "operatingSystem": "Android, iOS, Windows",
+      "applicationCategory": "EducationApplication",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "ratingCount": "1"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "NGN"
+      }
+    }
+    </script>
+
     <link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#fbbf24">
-<link rel="apple-touch-icon" href="/icon-192.png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #0b0e14;
-            --card: #161b22;
-            --accent: #fbbf24;
-            --text: #ffffff;
-            --text-dim: #8b949e;
-        }
-
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: 'Inter', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            line-height: 1.6;
-        }
-
-        .about-container {
-            background: var(--card);
-            border: 1px solid #30363d;
-            border-radius: 24px;
-            padding: 40px;
-            max-width: 550px;
-            width: 100%;
-            text-align: left; /* More natural for reading long text */
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-
-        .ev-logo-badge {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(145deg, #fbbf24, #b45309);
-            color: #0b0e14;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 12px;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-
-        h1 { font-size: 1.8rem; margin-bottom: 5px; letter-spacing: -0.5px; }
-        .version { color: var(--accent); font-size: 0.8rem; font-weight: 600; margin-bottom: 25px; display: block; }
-        
-        .content-section p {
-            margin-bottom: 15px;
-            font-size: 0.95rem;
-            color: #d1d5db;
-        }
-
-        .highlight { color: var(--accent); font-weight: 600; }
-
-        .mission-box {
-            background: rgba(251, 191, 36, 0.05);
-            border-left: 3px solid var(--accent);
-            padding: 15px;
-            margin: 25px 0;
-            font-style: italic;
-            font-size: 0.9rem;
-        }
-
-        .features-list {
-            margin: 25px 0;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .feature-item {
-            font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-dim);
-        }
-
-        .action-area {
-            text-align: center;
-            margin-top: 35px;
-            padding-top: 25px;
-            border-top: 1px solid #30363d;
-        }
-
-        .btn-back {
-            background: var(--accent);
-            color: #000;
-            padding: 12px 30px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-weight: 700;
-            transition: 0.3s;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .footer-brand {
-            margin-top: 30px;
-            font-size: 0.7rem;
-            color: #484f58;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        [data-theme="light"] body { background: #f0f2f5; color: #1a1a1a; }
-        [data-theme="light"] .about-container { background: #fff; border-color: #e0e0e0; }
-        [data-theme="light"] .content-section p { color: #333; }
-        [data-theme="light"] .mission-box { background: rgba(251,191,36,0.08); border-color: #b45309; }
-        [data-theme="light"] .feature-item { color: #5f6368; }
-        [data-theme="light"] .btn-back { background: rgba(0,0,0,0.05); border-color: #e0e0e0; color: #5f6368; }
-        [data-theme="light"] .btn-back:hover { background: rgba(251,191,36,0.15); color: #b45309; }
-        [data-theme="light"] .footer-brand { color: #5f6368; }
-    </style>
+    <meta name="theme-color" content="#fbbf24">
+    <link rel="apple-touch-icon" href="/icon-192.png">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-    <div class="about-container">
-        <div class="ev-logo-badge"><img src="logo4.png" style="width: 100px; height: auto;"></div>
-        <h1>Exams Venture</h1>
-        <span class="version">V1.0 • Built for Nigerian Students</span>
-        
-        <div class="content-section">
-            <p>
-                Let’s be honest—keeping track of your CGPA shouldn't feel harder than the exams themselves. Whether you’re a freshman trying to set a strong foundation or a final-year student calculating exactly what you need for that <span class="highlight">First Class</span> or <span class="highlight">2.1</span>, we built this for you.
-            </p>
-
-            <p>
-                Exams Venture started with a simple goal: to create a tool that actually understands the <span class="highlight">Nigerian University system</span>. From Engineering students at UI and UNILAG to Social Science students at ABU or UNIBEN, we’ve made sure the math works for every department, no matter the scale.
-            </p>
-
-            <div class="mission-box">
-                "We don't just calculate your past; we help you plan your future."
-            </div>
-
-            <p>
-                Our <strong>Target Tracker</strong> isn't just a calculator—it's your academic roadmap. It tells you exactly the GPA you need in your remaining semesters to reach your final goal. No more guessing, no more manual math on the back of notebooks.
-            </p>
-
-            <div class="features-list">
-                <div class="feature-item">📍 4.0 & 5.0 Systems</div>
-                <div class="feature-item">🔒 100% Private</div>
-                <div class="feature-item">📊 Smart Target Logic</div>
-                <div class="feature-item">📄 Clean PDF Reports</div>
-            </div>
+    <div id="ad-house" style="background: #020617; display: flex; align-items: center; justify-content: center; overflow: hidden; height: 60px;">
+        <div id="dynamic-ad-wrapper" style="width:100%; display:flex; justify-content:center;">
+            <ins class="adsbygoogle"
+                 style="display:block; width:320px; height:50px"
+                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" 
+                 data-ad-slot="XXXXXXXXXX"
+                 data-full-width-responsive="false"></ins>
         </div>
-
-        <div class="action-area">
-            <a href="index.html" class="btn-back" id="btn-back">Back to Calculator</a>
-            <div class="footer-brand">
-                Part of the <strong>Exams Venture</strong> Ecosystem
-            </div>
-        </div>
-    <script>
-        (function(){
-            const scale = localStorage.getItem('ev-scale') || '5.0';
-            const back = document.getElementById('btn-back');
-            if (back) back.href = `calculator.html?scale=${scale}`;
-        })();
-    </script>
     </div>
 
+    <div class="top-bar">
+        <button id="open-sidebar" class="constant-menu-btn" onclick="toggleSidebar()">
+            <div class="hamburger-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </button>
+        <span class="app-logo-text">CGPA Calculator</span>
+        <span id="offline-countdown" style="font-size:0.8rem; color:#ff6b6b; font-weight:bold; display:none; margin-left:auto;">Offline: 05:00</span>
+    </div>
+
+    <div id="side-menu" class="sidebar">
+        <div class="sidebar-header">
+            <span class="badge">Student Profile</span>
+            <button class="close-btn" onclick="toggleSidebar()">×</button>
+            <div class="profile-trigger" onclick="switchView('view-profile')">
+                <div class="profile-info">
+                    <div class="profile-pic" id="prof-dept-short-side"></div>
+                    <p id="prof-name-side" style="font-weight: bold; color: var(--accent); margin-bottom: 2px;"></p>
+                    <small id="prof-level-side" style="display: block; color: var(--text-dim); font-size: 0.75rem;"></small>
+                    <small id="prof-uni-side" style="display: block; color: var(--text-dim); font-size: 0.7rem; opacity: 0.8;"></small>
+                </div>
+            </div>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-item active" onclick="switchView('view-dashboard')">
+                <span class="icon">🏠</span>
+                <div class="nav-text">
+                    <strong>Home</strong>
+                    <small>Dashboard & CGPA</small>
+                </div>
+            </div>
+
+            <div class="nav-item" onclick="switchView('view-calc')">
+                <span class="icon">➕</span>
+                <div class="nav-text">
+                    <strong>CGPA</strong>
+                    <small>Calculator</small>
+                </div>
+            </div>
+
+            <div class="nav-item" onclick="switchView('view-target')">
+                <span class="icon">🎯</span>
+                <div class="nav-text">
+                    <strong>Target</strong>
+                    <small>GPA Goal Tracking</small>
+                </div>
+            </div>
+            
+            <div class="nav-item" onclick="switchView('view-profile')">
+                <span class="icon">👤</span>
+                <div class="nav-text">
+                    <strong>Profile</strong>
+                    <small>Edit Student Info</small>
+                </div>
+            </div>
+            <a href="about_app.html" class="nav-item-link">
+                <div class="nav-item">
+                    <span class="icon">ℹ️</span>
+                    <div class="nav-text">
+                        <strong>About</strong>
+                        <small>Exams Venture CGPA Calculator</small>
+                    </div>
+                </div>
+            </a>
+            <a href="terms_and_conditions_ev.html" class="nav-item-link">
+                <div class="nav-item">
+                    <span class="icon">⚖️</span>
+                    <div class="nav-text">
+                        <strong>Terms and Conditions</strong>
+                    </div>
+                </div>
+            </a>
+            <a href="privacy_policy.html" class="nav-item-link">
+                <div class="nav-item">
+                    <span class="icon">🔒</span>
+                    <div class="nav-text">
+                        <strong>Privacy Policy</strong>
+                    </div>
+                </div>
+            </a>
+            <div class="nav-item" style="padding: 10px 16px; margin:4px 12px 12px; border:1px solid rgba(255,255,255,0.14); border-radius:10px; background: rgba(255,255,255,0.03); text-align:center;">
+                <a id="scale-switch-link" href="#" style="color: var(--accent); text-decoration: none; font-size: 0.88rem; font-weight: 600;"></a>
+            </div>
+
+            <div class="sidebar-links">
+                <button onclick="toggleTheme()" class="theme-toggle-btn" id="theme-toggle-btn">☀️ Light Mode</button>
+                <button onclick="clearAllData()" class="btn-reset-sidebar">Wipe All Data</button>
+                <p class="sidebar-footer">Exams Venture v1.0</p>
+            </div>
+        </nav>
+    </div>
+
+    <div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
+
+    <div id="onboarding-overlay" class="onboarding-overlay" style="display:none;">
+        <div class="onboarding-card">
+            <div id="onboarding-step-1" class="onboarding-step">
+                <h3 style="color: var(--accent); margin-bottom: 12px;">👋 Welcome to Exams Venture!</h3>
+                <p style="color: var(--text-dim); font-size: 0.95rem; line-height: 1.5; margin-bottom: 20px;">Your PIN is set. Let's get you started in 2 quick steps so you can track your CGPA like a pro.</p>
+                <button class="btn-save" onclick="onboardingNext()">Next</button>
+            </div>
+            <div id="onboarding-step-2" class="onboarding-step" style="display:none;">
+                <h3 style="color: var(--accent); margin-bottom: 12px;">📋 Step 1: Add Your Profile</h3>
+                <p style="color: var(--text-dim); font-size: 0.95rem; line-height: 1.5; margin-bottom: 20px;">Enter your name, university, and department in Profile. This personalizes your dashboard and powers the Target Tracker.</p>
+                <button class="btn-save" onclick="onboardingNext()">Next</button>
+            </div>
+            <div id="onboarding-step-3" class="onboarding-step" style="display:none;">
+                <h3 style="color: var(--accent); margin-bottom: 12px;">📚 Step 2: Add Your First Semester</h3>
+                <p style="color: var(--text-dim); font-size: 0.95rem; line-height: 1.5; margin-bottom: 20px;">Select a semester, add your courses with units and grades, then save. Your CGPA will update instantly!</p>
+                <button class="btn-save" onclick="onboardingComplete()">Let's Go!</button>
+            </div>
+            <a href="#" onclick="onboardingSkip(); return false;" style="display:block; text-align:center; margin-top:12px; font-size:0.8rem; color: var(--text-dim);">Skip for now</a>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <section id="view-login" class="view active">
+            <div class="stats-card login-card">
+                <div class="lock-icon">🔒</div>
+                <h2>Exams Venture Secure</h2>
+                <p id="login-instruction">Enter your 4-digit PIN</p>
+                
+                <p id="pin-hint-display" style="font-size: 0.75rem; color: var(--accent); margin-top: 5px; font-style: italic;"></p>
+
+                <input type="password" id="login-pin" maxlength="4" placeholder="****" inputmode="numeric">
+                
+                <button class="btn-save" onclick="checkLogin()">Unlock App</button>
+                <p style="margin-top: 15px; font-size: 0.75rem; color: var(--text-dim); text-align: center;">
+                    Forgot PIN? 
+                    <a href="#" onclick="triggerImportFile(); return false;" style="color: #60a5fa; text-decoration: none; font-weight: bold;">
+                        Import Backup from File
+                    </a>
+                    <br>
+                    <a href="#" onclick="handleReset(); return false;" style="color: #ff4444; text-decoration: none; font-weight: bold; margin-top:5px; display:inline-block;">
+                        Reset App (Delete Data)
+                    </a>
+                </p>
+                <input type="file" id="import-file" hidden onchange="importDataJSON(this)">
+            </div>
+        </section>
+
+        <section id="view-dashboard" class="view">
+            <div class="profile-info">
+                <div class="profile-pic" id="prof-dept-short">Dept</div>
+                <h3 id="prof-level">---</h3>
+                <p id="prof-uni">---</p>
+                <p id="prof-name" style="font-weight: bold; color: var(--accent);"></p> 
+            </div>
+
+            <div class="stats-card" id="current-cgpa-card" style="cursor:pointer;">
+                <div class="cgpa-circle">
+                    <span id="display-cgpa">0.00</span>
+                    <p>Current CGPA</p>
+                </div>
+                
+                <div id="class-predictor" style="margin: 15px 0;"></div>
+
+                <div class="stats-row">
+                    <div class="stat">
+                        <small>Total Units</small>
+                        <b id="display-units">0</b>
+                    </div>
+                    <div class="stat">
+                        <small>Class</small>
+                        <b id="display-class">---</b>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-card" id="gpa-chart-card">
+                <h4 style="margin-bottom:12px; font-size:0.95rem; color: var(--accent);">📈 GPA Trend</h4>
+                <div style="position:relative; height:180px;">
+                    <canvas id="gpa-trend-chart"></canvas>
+                </div>
+                <p id="gpa-chart-empty" style="display:none; text-align:center; color:var(--text-dim); font-size:0.85rem; padding:20px;">Add semesters to see your GPA trend</p>
+            </div>
+
+            <div class="stats-card" id="grade-dist-card">
+                <h4 style="margin-bottom:12px; font-size:0.95rem; color: var(--accent);">📊 Grade Distribution</h4>
+                <div style="position:relative; height:180px;">
+                    <canvas id="grade-dist-chart"></canvas>
+                </div>
+                <p id="grade-dist-empty" style="display:none; text-align:center; color:var(--text-dim); font-size:0.85rem; padding:20px;">Add semesters to see grade spread</p>
+            </div>
+
+            <div class="section-title">
+                <h3>Academic History</h3>
+            </div>
+            <div class="semester-list" id="dynamic-sem-list"></div>
+            <button class="btn-secondary" onclick="exportToPDF()">Export Report (PDF)</button>
+            <button class="btn-secondary" onclick="exportBackupJSON()">Export Backup (JSON)</button>
+        </section>
+
+        <section id="view-profile" class="view">
+            <header class="view-header">
+                <button onclick="switchView('view-dashboard')" class="btn-back">← Back</button>
+                <h2>Student Profile</h2>
+            </header>
+            <div class="stats-card" style="text-align: left;">
+                <div class="selection-group">
+                    <label>Full Name</label>
+                    <input type="text" id="setup-name" class="inp-select-pro" placeholder="Enter Full Name">
+                    
+                    <label style="margin-top:15px;">University</label>
+                    <input type="text" id="setup-uni" class="inp-select-pro" placeholder="e.g. University or Polytechnic">
+                    
+                    <label style="margin-top:15px;">Faculty</label>
+                    <input type="text" id="setup-faculty" class="inp-select-pro" placeholder="e.g. Faculty">
+                    
+                    <label style="margin-top:15px;">Department</label>
+                    <input type="text" id="setup-dept" class="inp-select-pro" placeholder="e.g. Dept">
+                    
+                    <label style="margin-top:15px;">Current Level</label>
+                    <select id="setup-level" class="inp-select-pro">
+                        <option value="100 Level">100 Level</option>
+                        <option value="200 Level">200 Level</option>
+                        <option value="300 Level">300 Level</option>
+                        <option value="400 Level">400 Level</option>
+                        <option value="500 Level">500 Level</option>
+                        <option value="600 Level">600 Level</option>
+                    </select>
+
+                    <div class="profile-group">
+                        <label>Total Units for Degree:</label>
+                        <input type="text" inputmode="decimal" id="prof-total-units" placeholder="e.g. 120 or 200" class="inp-select-pro" pattern="[0-9]*">
+                    </div>
+                </div>
+                <button class="btn-save" style="margin-top:20px;" onclick="saveProfile()">Save Profile</button>
+            </div>
+        </section>
+
+        <section id="view-calc" class="view">
+            <header class="view-header">
+                <button onclick="switchView('view-dashboard')" class="btn-back">← Back</button>
+                <h2>Edit Semester</h2>
+            </header>
+
+            <div class="selection-group">
+                <label for="sem-select">Select Academic Period:</label>
+                <select id="sem-select" class="inp-select-pro"></select>
+            </div>
+
+            <div class="selection-group" style="margin-bottom: 12px;">
+                <label for="semester-notes">📝 Semester Notes (optional)</label>
+                <textarea id="semester-notes" class="inp-notes" placeholder="e.g. Stressful semester, Strike period, Changed department..." rows="2"></textarea>
+            </div>
+
+            <div class="stats-card" id="whatif-card" style="margin-bottom:16px; padding:14px;">
+                <h4 style="font-size:0.9rem; color: var(--accent); margin-bottom:6px;">🔮 What-if Preview</h4>
+                <p style="margin:0; font-size:1.5rem; font-weight:bold;" id="projected-cgpa">--</p>
+                <small style="color: var(--text-dim); font-size:0.75rem;">CGPA if you save now • Updates as you change grades</small>
+            </div>
+
+            <div class="course-list" id="course-container"></div>
+
+            <div class="action-bar">
+                <button class="btn-secondary" onclick="addCourseRow()">+ Add Course</button>
+                <button class="btn-save" onclick="saveSemesterData()">Save Semester</button>
+            </div>
+
+            <div class="bulk-import-section">
+                <button class="btn-bulk-toggle" onclick="toggleBulkInput()">
+                    ✨ Bulk Import from AI Scan
+                </button>
+
+                <div id="bulk-input-area" class="bulk-drawer" style="display: none;">
+                    <div class="ai-instruction-card">
+                        <h4><b>Step 1: Extract Data with AI (Like Chat GPT or Gemini)</b></h4>
+                        <br>
+                        <h5><i> - Click the "Copy" button to copy the specialized AI extraction prompt.
+                            - Upload your result image to the AI, paste the prompt, and let it generate the formatted list of your courses, units, and grades.
+                        </i></h5>
+                        <div class="code-copy-box">
+                            <code id="ai-prompt-text">TASK: Extract academic results from the attached image.
+
+FORMATTING RULES:
+1. Output ONLY a valid JSON array inside a SINGLE markdown code block.
+2. ABSOLUTELY NO text before or after the code block.
+3. No conversational filler or explanations.
+4. JSON Structure: [{"code": "STRING", "unit": NUMBER, "grade": NUMBER}]
+
+GRADING LOGIC:
+Convert Letter Grades to Numbers immediately:
+4.0 Scale: A=4, B=3, C=2, D=1, F=0
+5.0 Scale: A=5, B=4, C=3, D=2, E=1, F=0
+
+IMAGE DATA: [Attached Image]</code>
+                            <button onclick="copyPrompt()" class="btn-copy">Copy</button>
+                        </div>
+                    </div>
+
+                    <h4><b>Step 2: Paste JSON Result</b></h4>
+                    <br>
+                    <h5><i> - Copy the code-like list (JSON) generated by the AI and paste it into the "Paste JSON Result" field below
+                        - Click "Inject Courses" to instantly populate your calculator with all your subjects.
+                    </i></h5>
+                    
+                    <textarea id="json-paste-area" placeholder="Paste the JSON list here..."></textarea>
+                    <button class="btn-process" onclick="processBulkJSON()">Inject Courses</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-target" class="view">
+            <header class="main-header">
+                <h1>Target Tracker</h1>
+            </header>
+            <div class="stats-card">
+                <label>Goal CGPA:</label>
+                <input type="text" inputmode="decimal" id="goal-input" placeholder="e.g. 4.0 or 5.0" class="inp-select-pro" pattern="[0-9.]*">
+                <label style="margin-top:15px; display:block;">Units Remaining:</label>
+                <input type="text" inputmode="decimal" id="remaining-units" placeholder="e.g. 100" class="inp-select-pro" pattern="[0-9]*">
+                <p>Edit total degree unit in profile to change remaining-units</p>
+                <button class="btn-save" style="margin-top:20px;" onclick="calculateTarget()">Analyze Future</button>
+            </div>
+            <div id="target-result" class="stats-card" style="display:none; border: 1px solid #fbbf24;"></div>
+        </section>
+    </div>
+
+    <!-- Offline Lockout Overlay -->
+    <div id="offline-lockout" class="offline-lockout-overlay" style="display:none;">
+        <div class="offline-lockout-card">
+            <div class="offline-lockout-icon">🔌</div>
+            <h2>Connection Expired</h2>
+            <p>You've been offline for 5 minutes. Please connect to the internet to continue using Exams Venture.</p>
+            <p class="offline-lockout-hint">Your data is safe and will sync once you're back online.</p>
+        </div>
+    </div>
+
+    <!-- Load config first, then main logic -->
+    <script src="config.js"></script>
+    <script src="main.js"></script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('Exams Venture PWA: Active'))
+                    .catch(err => console.log('PWA Registration Failed: ', err));
+            });
+        }
+    </script>
 </body>
 </html>
