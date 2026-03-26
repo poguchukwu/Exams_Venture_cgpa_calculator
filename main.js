@@ -1472,9 +1472,17 @@ const AdEngine = {
 };
 
 /**
- * PWA INSTALLATION LOGIC
+ * PWA INSTALLATION & PERMANENT STORAGE LOGIC
  */
 let deferredPrompt;
+
+// Request Permanent Storage from the phone
+async function requestPersistentStorage() {
+    if (navigator.storage && navigator.storage.persist) {
+        const isPersisted = await navigator.storage.persist();
+        console.log(`PWA: Permanent Storage granted? ${isPersisted}`);
+    }
+}
 
 window.addEventListener('beforeinstallprompt', (e) => {
     // Prevent the default browser prompt
@@ -1510,6 +1518,7 @@ async function installPWA() {
 
 window.addEventListener('appinstalled', (evt) => {
     console.log('App installed successfully');
+    requestPersistentStorage(); // Lock files to permanent storage
     // Show the confirmation notification
     const notification = document.getElementById('install-notification');
     if (notification) {
@@ -1649,4 +1658,5 @@ function disableAllControls(shouldDisable) {
 window.addEventListener('DOMContentLoaded', () => {
     AdEngine.init();
     initOfflineDetection();
+    requestPersistentStorage(); // Ensure storage is permanent
 });

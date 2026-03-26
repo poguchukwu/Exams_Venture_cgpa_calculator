@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ev-cgpa-cache-v3';
+const CACHE_NAME = 'ev-cgpa-cache-v4';
 const urlsToCache = [
     './',
     './index.html',
@@ -18,14 +18,16 @@ const urlsToCache = [
     'https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js'
 ];
 
+// FORCE INSTALLATION: This ensures the browser downloads everything to phone storage immediately
 self.addEventListener('install', event => {
     self.skipWaiting();
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then(cache => {
-                console.log('Opened cache, pre-caching all files for offline use');
+                console.log('PWA: Downloading all codes to phone storage...');
                 return cache.addAll(urlsToCache);
             })
+            .then(() => console.log('PWA: Download Complete. Files are now permanent.'))
     );
 });
 
