@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ev-cgpa-cache-v4';
+const CACHE_NAME = 'ev-cgpa-cache-v5';
 const urlsToCache = [
     './',
     './index.html',
@@ -24,10 +24,10 @@ self.addEventListener('install', event => {
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then(cache => {
-                console.log('PWA: Downloading all codes to phone storage...');
+                console.log('PWA: Force-downloading new version to phone storage...');
                 return cache.addAll(urlsToCache);
             })
-            .then(() => console.log('PWA: Download Complete. Files are now permanent.'))
+            .then(() => console.log('PWA: Force-overwrite complete. Files are now permanent.'))
     );
 });
 
@@ -37,12 +37,12 @@ self.addEventListener('activate', event => {
             return Promise.all(
                 cacheNames.map(cacheName => {
                     if (cacheName !== CACHE_NAME) {
-                        console.log('Deleting old cache:', cacheName);
+                        console.log('Force-deleting old version:', cacheName);
                         return caches.delete(cacheName);
                     }
                 })
             );
-        })
+        }).then(() => self.clients.claim()) // Take control of all pages immediately
     );
 });
 
