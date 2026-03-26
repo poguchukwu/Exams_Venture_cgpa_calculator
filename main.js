@@ -1404,14 +1404,8 @@ const AdEngine = {
 };
 
 /**
- * PWA INSTALLATION & PERMANENT STORAGE LOGIC
+ * PWA & PERMANENT STORAGE LOGIC
  */
-let deferredPrompt;
-
-// Check if app is already installed/running in standalone mode
-function isAppInstalled() {
-    return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-}
 
 // Request Permanent Storage from the phone
 async function requestPersistentStorage() {
@@ -1421,50 +1415,9 @@ async function requestPersistentStorage() {
     }
 }
 
-// Initialize PWA Visibility (Simplified - CSS handles most of this now)
-function initPWAVisibility() {
-    const isInstalled = isAppInstalled();
-    console.log(`PWA Status: ${isInstalled ? 'Standalone/Installed' : 'Browser/Not Installed'}`);
-}
-
-window.addEventListener('beforeinstallprompt', (e) => {
-    // Prevent the default browser prompt
-    e.preventDefault();
-    // Stash the event so it can be triggered later
-    deferredPrompt = e;
-});
-
-async function installPWA() {
-    if (deferredPrompt) {
-        // Show the browser's native install prompt
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        console.log(`User response to the install prompt: ${outcome}`);
-        deferredPrompt = null;
-    } else {
-        // Fallback: Manual Instructions (for iOS or delayed prompts)
-        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-        if (isIOS) {
-            alert("To install on iOS:\n1. Tap the 'Share' icon (square with arrow) at the bottom.\n2. Scroll down and tap 'Add to Home Screen'.");
-        } else {
-            alert("To install:\n1. Open your browser menu (usually three dots ⋮).\n2. Tap 'Install App' or 'Add to Home Screen'.");
-        }
-    }
-}
-
 window.addEventListener('appinstalled', (evt) => {
     console.log('App installed successfully');
     requestPersistentStorage(); // Lock files to permanent storage
-
-    // Show the confirmation notification
-    const notification = document.getElementById('install-notification');
-    if (notification) {
-        notification.style.display = 'block';
-        setTimeout(() => {
-            notification.style.animation = 'slideDown 0.5s ease-in forwards';
-            setTimeout(() => notification.style.display = 'none', 500);
-        }, 4000);
-    }
 });
 
 // ===== OFFLINE LOCKDOWN SYSTEM (5-MINUTE HARD LOCKDOWN) =====
@@ -1661,7 +1614,6 @@ window.addEventListener('DOMContentLoaded', async () => {
     AdEngine.init();
     initOfflineDetection();
     requestPersistentStorage();
-    initPWAVisibility();
 
     // 7. Service Worker Registration
     if ('serviceWorker' in navigator) {

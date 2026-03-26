@@ -214,39 +214,6 @@
         .theme-toggle-link { position: fixed; top: 15px; right: 15px; padding: 8px 14px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: var(--accent); font-size: 0.8rem; cursor: pointer; text-decoration: none; z-index: 100; }
         .theme-toggle-link:hover { background: rgba(251,191,36,0.2); }
         [data-theme="light"] .theme-toggle-link { background: rgba(0,0,0,0.05); border-color: #e0e0e0; color: #b45309; }
-        
-        /* Force install button visibility in browser, hide only when installed */
-        #install-btn-index { display: flex !important; }
-        @media (display-mode: standalone) {
-            #install-btn-index { display: none !important; }
-        }
-        
-        .install-btn-container {
-            margin-top: 20px;
-            margin-bottom: 60px; /* Extra space for scrolling on phone */
-            animation: fadeIn 1.2s ease-out;
-        }
-
-        .btn-install {
-            background: var(--accent);
-            color: #000;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-weight: 800;
-            font-size: 0.9rem;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-install:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        }
     </style>
 </head>
 <body>
@@ -277,17 +244,8 @@
     </div>
 
     <div class="footer-note">Designed for Nigerian University Standards</div>
-    
-    <div class="install-btn-container" id="install-btn-index">
-        <button class="btn-install" onclick="installPWA()">📲 INSTALL TO PHONE</button>
-    </div>
 
     <a href="#" class="theme-toggle-link" onclick="evToggleTheme();return false;" id="choice-theme-btn">☀️ Light</a>
-
-    <!-- App Installed Notification -->
-    <div id="install-notification" style="display:none; position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:var(--accent); color:#000; padding:12px 24px; border-radius:30px; font-weight:bold; box-shadow:0 4px 15px rgba(0,0,0,0.3); z-index:9999; animation: slideUp 0.5s ease-out;">
-        ✅ Download Finished! App Installed.
-    </div>
 
     <script src="config.js"></script>
     <script src="main.js"></script>

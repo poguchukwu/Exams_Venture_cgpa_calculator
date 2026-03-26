@@ -41,13 +41,6 @@
     <meta name="theme-color" content="#fbbf24">
     <link rel="apple-touch-icon" href="icon-192.png">
     <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Force install button visibility in browser, hide only when installed */
-        #install-btn { display: block !important; }
-        @media (display-mode: standalone) {
-            #install-btn { display: none !important; }
-        }
-    </style>
 </head>
 <body>
     <div id="ad-house" style="background: #020617; display: flex; align-items: center; justify-content: center; overflow: hidden; height: 60px;">
@@ -148,7 +141,6 @@
             </div>
 
             <div class="sidebar-links">
-                <button id="install-btn" class="theme-toggle-btn" style="background: var(--accent); color: #000; font-weight: bold; margin-bottom: 12px;" onclick="installPWA()">📲 INSTALL TO PHONE</button>
                 <button onclick="toggleTheme()" class="theme-toggle-btn" id="theme-toggle-btn">☀️ Light Mode</button>
                 <button onclick="clearAllData()" class="btn-reset-sidebar">Wipe All Data</button>
                 <p class="sidebar-footer">Exams Venture v1.0</p>
@@ -391,11 +383,6 @@ IMAGE DATA: [Attached Image]</code>
             <p>You've been offline for 5 minutes. Please connect to the internet to continue using Exams Venture.</p>
             <p class="offline-lockout-hint">Your data is safe and will sync once you're back online.</p>
         </div>
-    </div>
-
-    <!-- App Installed Notification -->
-    <div id="install-notification" style="display:none; position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:var(--accent); color:#000; padding:12px 24px; border-radius:30px; font-weight:bold; box-shadow:0 4px 15px rgba(0,0,0,0.3); z-index:9999; animation: slideUp 0.5s ease-out;">
-        ✅ Download Finished! App Installed.
     </div>
 
     <!-- Load config first, then main logic -->
