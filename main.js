@@ -1406,6 +1406,12 @@ const AdEngine = {
 /**
  * PWA & PERMANENT STORAGE LOGIC
  */
+let deferredPrompt = null;
+
+// Check if app is already installed/running in standalone mode
+function isAppInstalled() {
+    return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+}
 
 // Request Permanent Storage from the phone
 async function requestPersistentStorage() {
@@ -1415,9 +1421,59 @@ async function requestPersistentStorage() {
     }
 }
 
+// Update PWA Install UI Visibility
+function updatePWAInstallUI() {
+    const installBtns = document.querySelectorAll('.pwa-install-trigger');
+    const isStandalone = isAppInstalled();
+    
+    installBtns.forEach(btn => {
+        if (isStandalone) {
+            btn.style.display = 'none';
+        } else {
+            // Show if in browser, regardless of deferredPrompt (fallback to instructions)
+            btn.style.display = 'flex';
+        }
+    });
+}
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    // Prevent the default browser prompt
+    e.preventDefault();
+    // Stash the event so it can be triggered later
+    deferredPrompt = e;
+    // Ensure button is visible
+    updatePWAInstallUI();
+});
+
+async function triggerPWAInstall() {
+    if (deferredPrompt) {
+        // Show the browser's native install prompt
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        console.log(`User response to the install prompt: ${outcome}`);
+        
+        // We do NOT null deferredPrompt here if they dismissed it
+        // This allows them to try again without refreshing
+        if (outcome === 'accepted') {
+            deferredPrompt = null;
+            updatePWAInstallUI();
+        }
+    } else {
+        // Fallback: Manual Instructions (for iOS or delayed prompts)
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        if (isIOS) {
+            alert("To study offline on iPhone/iPad:\n1. Tap the 'Share' icon (square with arrow) at the bottom.\n2. Scroll down and tap 'Add to Home Screen'.");
+        } else {
+            alert("To study offline:\n1. Open your browser menu (usually three dots ⋮).\n2. Tap 'Install App' or 'Add to Home Screen'.");
+        }
+    }
+}
+
 window.addEventListener('appinstalled', (evt) => {
     console.log('App installed successfully');
+    deferredPrompt = null;
     requestPersistentStorage(); // Lock files to permanent storage
+    updatePWAInstallUI();
 });
 
 // ===== OFFLINE LOCKDOWN SYSTEM (5-MINUTE HARD LOCKDOWN) =====
@@ -1614,6 +1670,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     AdEngine.init();
     initOfflineDetection();
     requestPersistentStorage();
+    updatePWAInstallUI();
 
     // 7. Service Worker Registration
     if ('serviceWorker' in navigator) {

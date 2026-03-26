@@ -996,6 +996,48 @@ input, select, textarea {
     opacity: 0.5 !important;
 }
 
+/* 15. PWA INSTALL BUTTON (Elite Minimalist) */
+.pwa-install-trigger {
+    display: none; /* Controlled by JS/Media Query */
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #fbbf24 0%, #b45309 100%);
+    color: #020617; /* Navy Blue Text */
+    border: none;
+    border-radius: 12px;
+    padding: 14px 20px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(180, 83, 9, 0.3);
+    width: calc(100% - 24px);
+    margin: 0 12px 15px;
+}
+
+.pwa-install-trigger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(180, 83, 9, 0.4);
+    filter: brightness(1.1);
+}
+
+.pwa-install-trigger:active {
+    transform: translateY(0);
+}
+
+.pwa-install-trigger .icon {
+    font-size: 1.2rem;
+}
+
+@media (display-mode: standalone) {
+    .pwa-install-trigger {
+        display: none !important;
+    }
+}
+
 /* ========== LIGHT THEME ========== */
 [data-theme="light"] {
     --bg: #f0f2f5;
