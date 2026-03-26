@@ -1406,6 +1406,7 @@ window.addEventListener('DOMContentLoaded', async () => {
                 Switch to ${scale} scale
             </a>
         `).join('');
+    
     }
 });
 
