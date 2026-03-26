@@ -1476,6 +1476,11 @@ const AdEngine = {
  */
 let deferredPrompt;
 
+// Check if app is already installed/running in standalone mode
+function isAppInstalled() {
+    return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+}
+
 // Request Permanent Storage from the phone
 async function requestPersistentStorage() {
     if (navigator.storage && navigator.storage.persist) {
@@ -1484,41 +1489,57 @@ async function requestPersistentStorage() {
     }
 }
 
+// Initialize PWA Visibility
+function initPWAVisibility() {
+    const installBtn = document.getElementById('install-btn');
+    if (!installBtn) return;
+
+    if (isAppInstalled()) {
+        installBtn.style.display = 'none'; // Hide if already in the app
+    } else {
+        installBtn.style.display = 'block'; // Always show in browser
+    }
+}
+
 window.addEventListener('beforeinstallprompt', (e) => {
     // Prevent the default browser prompt
     e.preventDefault();
     // Stash the event so it can be triggered later
     deferredPrompt = e;
-    // Show the install button in the sidebar
-    const installBtn = document.getElementById('install-btn');
-    if (installBtn) {
-        installBtn.style.display = 'block';
-    }
+    // Ensure button is visible
+    initPWAVisibility();
 });
 
 async function installPWA() {
-    if (!deferredPrompt) return;
-    
-    // Show the browser's install prompt
-    deferredPrompt.prompt();
-    
-    // Wait for the user to respond to the prompt
-    const { outcome } = await deferredPrompt.userChoice;
-    console.log(`User response to the install prompt: ${outcome}`);
-    
-    // Reset the deferredPrompt variable
-    deferredPrompt = null;
-    
-    // Hide the install button
-    const installBtn = document.getElementById('install-btn');
-    if (installBtn) {
-        installBtn.style.display = 'none';
+    if (deferredPrompt) {
+        // Show the browser's native install prompt
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        console.log(`User response to the install prompt: ${outcome}`);
+        deferredPrompt = null;
+        
+        if (outcome === 'accepted') {
+            const installBtn = document.getElementById('install-btn');
+            if (installBtn) installBtn.style.display = 'none';
+        }
+    } else {
+        // Fallback: Manual Instructions (for iOS or delayed prompts)
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        if (isIOS) {
+            alert("To install on iOS:\n1. Tap the 'Share' icon (square with arrow) at the bottom.\n2. Scroll down and tap 'Add to Home Screen'.");
+        } else {
+            alert("To install:\n1. Open your browser menu (usually three dots ⋮).\n2. Tap 'Install App' or 'Add to Home Screen'.");
+        }
     }
 }
 
 window.addEventListener('appinstalled', (evt) => {
     console.log('App installed successfully');
     requestPersistentStorage(); // Lock files to permanent storage
+    
+    const installBtn = document.getElementById('install-btn');
+    if (installBtn) installBtn.style.display = 'none';
+
     // Show the confirmation notification
     const notification = document.getElementById('install-notification');
     if (notification) {
@@ -1659,4 +1680,5 @@ window.addEventListener('DOMContentLoaded', () => {
     AdEngine.init();
     initOfflineDetection();
     requestPersistentStorage(); // Ensure storage is permanent
+    initPWAVisibility(); // Show install button if in browser
 });
