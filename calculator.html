@@ -41,6 +41,15 @@
     <meta name="theme-color" content="#fbbf24">
     <link rel="apple-touch-icon" href="icon-192.png">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Hide install button when app is running as a PWA */
+        @media (display-mode: standalone) {
+            #install-btn { display: none !important; }
+        }
+        @media (display-mode: browser) {
+            #install-btn { display: block !important; }
+        }
+    </style>
 </head>
 <body>
     <div id="ad-house" style="background: #020617; display: flex; align-items: center; justify-content: center; overflow: hidden; height: 60px;">
@@ -141,7 +150,7 @@
             </div>
 
             <div class="sidebar-links">
-                <button id="install-btn" class="theme-toggle-btn" style="display:none; background: var(--accent); color: #000; font-weight: bold; margin-bottom: 12px;" onclick="installPWA()">📲 Install App</button>
+                <button id="install-btn" class="theme-toggle-btn" style="background: var(--accent); color: #000; font-weight: bold; margin-bottom: 12px;" onclick="installPWA()">📲 Install App</button>
                 <button onclick="toggleTheme()" class="theme-toggle-btn" id="theme-toggle-btn">☀️ Light Mode</button>
                 <button onclick="clearAllData()" class="btn-reset-sidebar">Wipe All Data</button>
                 <p class="sidebar-footer">Exams Venture v1.0</p>
@@ -396,14 +405,6 @@ IMAGE DATA: [Attached Image]</code>
     <script src="main.js"></script>
 
     <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js')
-                    .then(reg => console.log('Exams Venture PWA: Active'))
-                    .catch(err => console.log('PWA Registration Failed: ', err));
-            });
-        }
-
         // Handle App Installation Event
         window.addEventListener('appinstalled', (evt) => {
             console.log('App installed successfully');

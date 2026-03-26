@@ -1127,24 +1127,6 @@ function onboardingSkip() {
     document.getElementById('onboarding-overlay').style.display = 'none';
 }
 
-window.onload = function() {
-    localStorage.setItem('ev-scale', ACTIVE_SCALE);
-
-    initTheme();
-    populateSemesters();
-    updateDashboard();
-    getRemainingUnits();
-    applyProfile();
-    
-    const semSelect = document.getElementById('sem-select');
-    if(semSelect) loadSemesterData(semSelect.value);
-
-    const viewCalc = document.getElementById('view-calc');
-    if (viewCalc) {
-        viewCalc.addEventListener('change', () => updateProjectedCGPA());
-        viewCalc.addEventListener('input', () => updateProjectedCGPA());
-    }
-};
 
 function handleReset() {
     const config = getConfig();
@@ -1359,56 +1341,6 @@ function showWaitScreen(msg) {
     }
 }
 
-window.addEventListener('DOMContentLoaded', async () => {
-    if (window.Capacitor) {
-        try {
-            await window.Capacitor.Plugins.AdMob.initialize();
-            triggerAdRefresh();
-        } catch (e) { console.log("AdMob init failed"); }
-    }
-
-    const loginView = document.getElementById('view-login');
-    if (loginView && loginView.classList.contains('active')) {
-        const topBar = document.querySelector('.top-bar');
-        if (topBar) topBar.style.display = 'none';
-        
-        const adHouse = document.getElementById('ad-container-bottom');
-        if (adHouse) adHouse.style.display = 'none';
-    }
-    
-    const config = getConfig();
-    const savedPin = localStorage.getItem(getStorageKey('pin'));
-    const instruction = document.getElementById('login-instruction');
-    if (instruction) {
-        if (savedPin) {
-            instruction.innerText = `Enter your secret ${ACTIVE_SCALE} PIN to continue`;
-        } else {
-            instruction.innerText = `First time here? Create a 4-digit PIN to secure your ${ACTIVE_SCALE} data.`;
-        }
-    }
-
-    const profileInput = document.getElementById('prof-total-units');
-    if (profileInput) {
-        const savedProfile = JSON.parse(localStorage.getItem(getStorageKey('profile')) || '{}');
-        if (savedProfile.totalUnits) {
-            profileInput.value = savedProfile.totalUnits;
-        }
-    }
-    
-    updateDashboard();
-    updateRemainingUnitsDisplay();
-
-    const scaleLinksContainer = document.getElementById('scale-links');
-    if (scaleLinksContainer) {
-        const otherScales = Object.keys(SCALE_CONFIG).filter(s => s !== ACTIVE_SCALE);
-        scaleLinksContainer.innerHTML = otherScales.map(scale => `
-            <a href="calculator.html?scale=${scale}" style="color: var(--accent); text-decoration: none; font-size: 0.88rem; font-weight: 600;" title="Open the ${scale} calculator">
-                Switch to ${scale} scale
-            </a>
-        `).join('');
-    
-    }
-});
 
 // ===== GOOGLE ADSENSE USER-ACTION MODEL =====
 // Ads only refresh when: user navigates (switchView) or page loads
@@ -1492,12 +1424,24 @@ async function requestPersistentStorage() {
 // Initialize PWA Visibility
 function initPWAVisibility() {
     const installBtn = document.getElementById('install-btn');
-    if (!installBtn) return;
+    const installBtnIndex = document.getElementById('install-btn-index');
+    
+    const isInstalled = isAppInstalled();
+    console.log(`PWA Status: ${isInstalled ? 'Standalone/Installed' : 'Browser/Not Installed'}`);
 
-    if (isAppInstalled()) {
-        installBtn.style.display = 'none'; // Hide if already in the app
+    if (isInstalled) {
+        if (installBtn) installBtn.style.display = 'none';
+        if (installBtnIndex) installBtnIndex.style.display = 'none';
     } else {
-        installBtn.style.display = 'block'; // Always show in browser
+        // Show in browser
+        if (installBtn) {
+            installBtn.style.display = 'block';
+            installBtn.style.opacity = '1';
+        }
+        if (installBtnIndex) {
+            installBtnIndex.style.display = 'block';
+            installBtnIndex.style.opacity = '1';
+        }
     }
 }
 
@@ -1676,9 +1620,84 @@ function disableAllControls(shouldDisable) {
     });
 }
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
+    // 1. Core State Initialization
+    localStorage.setItem('ev-scale', ACTIVE_SCALE);
+    initTheme();
+    populateSemesters();
+    applyProfile();
+    updateDashboard();
+    updateRemainingUnitsDisplay();
+    
+    // 2. Calculator UI Listeners
+    const semSelect = document.getElementById('sem-select');
+    if (semSelect) loadSemesterData(semSelect.value);
+
+    const viewCalc = document.getElementById('view-calc');
+    if (viewCalc) {
+        viewCalc.addEventListener('change', () => updateProjectedCGPA());
+        viewCalc.addEventListener('input', () => updateProjectedCGPA());
+    }
+
+    // 3. Login & Navigation UI
+    const loginView = document.getElementById('view-login');
+    if (loginView && loginView.classList.contains('active')) {
+        const topBar = document.querySelector('.top-bar');
+        if (topBar) topBar.style.display = 'none';
+        const adHouse = document.getElementById('ad-container-bottom');
+        if (adHouse) adHouse.style.display = 'none';
+    }
+
+    const savedPin = localStorage.getItem(getStorageKey('pin'));
+    const instruction = document.getElementById('login-instruction');
+    if (instruction) {
+        if (savedPin) {
+            instruction.innerText = `Enter your secret ${ACTIVE_SCALE} PIN to continue`;
+        } else {
+            instruction.innerText = `First time here? Create a 4-digit PIN to secure your ${ACTIVE_SCALE} data.`;
+        }
+    }
+
+    const profileInput = document.getElementById('prof-total-units');
+    if (profileInput) {
+        const savedProfile = JSON.parse(localStorage.getItem(getStorageKey('profile')) || '{}');
+        if (savedProfile.totalUnits) {
+            profileInput.value = savedProfile.totalUnits;
+        }
+    }
+
+    // 4. Scale Switching Sidebar
+    const scaleLinksContainer = document.getElementById('scale-links');
+    if (scaleLinksContainer) {
+        const otherScales = Object.keys(SCALE_CONFIG).filter(s => s !== ACTIVE_SCALE);
+        scaleLinksContainer.innerHTML = otherScales.map(scale => `
+            <a href="calculator.html?scale=${scale}" style="color: var(--accent); text-decoration: none; font-size: 0.88rem; font-weight: 600;" title="Open the ${scale} calculator">
+                Switch to ${scale} scale
+            </a>
+        `).join('');
+    }
+
+    // 5. Capacitor & AdMob
+    if (window.Capacitor) {
+        try {
+            await window.Capacitor.Plugins.AdMob.initialize();
+            triggerAdRefresh();
+        } catch (e) { console.log("AdMob init failed"); }
+    }
+
+    // 6. AdEngine, Offline, & PWA
     AdEngine.init();
     initOfflineDetection();
-    requestPersistentStorage(); // Ensure storage is permanent
-    initPWAVisibility(); // Show install button if in browser
+    requestPersistentStorage();
+    initPWAVisibility();
+
+    // 7. Service Worker Registration
+    if ('serviceWorker' in navigator) {
+        try {
+            const reg = await navigator.serviceWorker.register('sw.js');
+            console.log('Exams Venture PWA: Active', reg.scope);
+        } catch (err) {
+            console.log('PWA Registration Failed: ', err);
+        }
+    }
 });
