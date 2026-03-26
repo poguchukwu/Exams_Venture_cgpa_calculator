@@ -1421,28 +1421,10 @@ async function requestPersistentStorage() {
     }
 }
 
-// Initialize PWA Visibility
+// Initialize PWA Visibility (Simplified - CSS handles most of this now)
 function initPWAVisibility() {
-    const installBtn = document.getElementById('install-btn');
-    const installBtnIndex = document.getElementById('install-btn-index');
-    
     const isInstalled = isAppInstalled();
     console.log(`PWA Status: ${isInstalled ? 'Standalone/Installed' : 'Browser/Not Installed'}`);
-
-    if (isInstalled) {
-        if (installBtn) installBtn.style.display = 'none';
-        if (installBtnIndex) installBtnIndex.style.display = 'none';
-    } else {
-        // Show in browser
-        if (installBtn) {
-            installBtn.style.display = 'block';
-            installBtn.style.opacity = '1';
-        }
-        if (installBtnIndex) {
-            installBtnIndex.style.display = 'block';
-            installBtnIndex.style.opacity = '1';
-        }
-    }
 }
 
 window.addEventListener('beforeinstallprompt', (e) => {
@@ -1450,8 +1432,6 @@ window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     // Stash the event so it can be triggered later
     deferredPrompt = e;
-    // Ensure button is visible
-    initPWAVisibility();
 });
 
 async function installPWA() {
@@ -1461,11 +1441,6 @@ async function installPWA() {
         const { outcome } = await deferredPrompt.userChoice;
         console.log(`User response to the install prompt: ${outcome}`);
         deferredPrompt = null;
-        
-        if (outcome === 'accepted') {
-            const installBtn = document.getElementById('install-btn');
-            if (installBtn) installBtn.style.display = 'none';
-        }
     } else {
         // Fallback: Manual Instructions (for iOS or delayed prompts)
         const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
@@ -1480,9 +1455,6 @@ async function installPWA() {
 window.addEventListener('appinstalled', (evt) => {
     console.log('App installed successfully');
     requestPersistentStorage(); // Lock files to permanent storage
-    
-    const installBtn = document.getElementById('install-btn');
-    if (installBtn) installBtn.style.display = 'none';
 
     // Show the confirmation notification
     const notification = document.getElementById('install-notification');

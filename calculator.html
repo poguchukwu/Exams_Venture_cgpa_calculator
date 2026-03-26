@@ -42,12 +42,10 @@
     <link rel="apple-touch-icon" href="icon-192.png">
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Hide install button when app is running as a PWA */
+        /* Force install button visibility in browser, hide only when installed */
+        #install-btn { display: block !important; }
         @media (display-mode: standalone) {
             #install-btn { display: none !important; }
-        }
-        @media (display-mode: browser) {
-            #install-btn { display: block !important; }
         }
     </style>
 </head>
