@@ -1471,6 +1471,56 @@ const AdEngine = {
     }
 };
 
+/**
+ * PWA INSTALLATION LOGIC
+ */
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    // Prevent the default browser prompt
+    e.preventDefault();
+    // Stash the event so it can be triggered later
+    deferredPrompt = e;
+    // Show the install button in the sidebar
+    const installBtn = document.getElementById('install-btn');
+    if (installBtn) {
+        installBtn.style.display = 'block';
+    }
+});
+
+async function installPWA() {
+    if (!deferredPrompt) return;
+    
+    // Show the browser's install prompt
+    deferredPrompt.prompt();
+    
+    // Wait for the user to respond to the prompt
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log(`User response to the install prompt: ${outcome}`);
+    
+    // Reset the deferredPrompt variable
+    deferredPrompt = null;
+    
+    // Hide the install button
+    const installBtn = document.getElementById('install-btn');
+    if (installBtn) {
+        installBtn.style.display = 'none';
+    }
+}
+
+window.addEventListener('appinstalled', (evt) => {
+    console.log('App installed successfully');
+    // Show the confirmation notification
+    const notification = document.getElementById('install-notification');
+    if (notification) {
+        notification.style.display = 'block';
+        setTimeout(() => {
+            notification.style.animation = 'slideDown 0.5s ease-in forwards';
+            setTimeout(() => notification.style.display = 'none', 500);
+        }, 4000);
+    }
+});
+
 // ===== OFFLINE LOCKDOWN SYSTEM (5-MINUTE HARD LOCKDOWN) =====
 const OFFLINE_KEY = 'offline_start_time';
 const OFFLINE_LOCKOUT_TIME = 300000; // 5 minutes in milliseconds
