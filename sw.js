@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ev-cgpa-cache-v5';
+const CACHE_NAME = 'ev-cgpa-cache-v6';
 const urlsToCache = [
     './',
     './index.html',
@@ -47,31 +47,24 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
-    // Aggressive Cache-First Strategy for all static assets
+    // STALE-WHILE-REVALIDATE Strategy
+    // 1. Respond from cache immediately (speed)
+    // 2. Fetch from network in the background and update cache (freshness)
     event.respondWith(
-        caches.match(event.request)
-            .then(response => {
-                // Cache hit - return response immediately
-                if (response) {
-                    return response;
-                }
-                
-                // Not in cache - fetch from network and cache for next time
-                return fetch(event.request).then(networkResponse => {
-                    if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
-                        return networkResponse;
+        caches.open(CACHE_NAME).then(cache => {
+            return cache.match(event.request).then(cachedResponse => {
+                const fetchPromise = fetch(event.request).then(networkResponse => {
+                    if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
+                        cache.put(event.request, networkResponse.clone());
                     }
-                    
-                    const responseToCache = networkResponse.clone();
-                    caches.open(CACHE_NAME).then(cache => {
-                        cache.put(event.request, responseToCache);
-                    });
-                    
                     return networkResponse;
                 }).catch(() => {
-                    // Offline and not in cache
-                    return new Response("Offline and resource not found in cache.");
+                    // Silent catch: network failed, we already have cache
                 });
-            })
+
+                // Return cached version if available, otherwise wait for network
+                return cachedResponse || fetchPromise;
+            });
+        })
     );
 });
