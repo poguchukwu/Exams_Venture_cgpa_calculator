@@ -1398,12 +1398,14 @@ window.addEventListener('DOMContentLoaded', async () => {
     updateDashboard();
     updateRemainingUnitsDisplay();
 
-    const switchScaleLink = document.getElementById('scale-switch-link');
-    if (switchScaleLink) {
-        const targetScale = ACTIVE_SCALE === '4.0' ? '5.0' : '4.0';
-        switchScaleLink.href = `calculator.html?scale=${targetScale}`;
-        switchScaleLink.textContent = `Switch to ${targetScale} scale`;
-        switchScaleLink.title = `Open the ${targetScale} calculator`; 
+    const scaleLinksContainer = document.getElementById('scale-links');
+    if (scaleLinksContainer) {
+        const otherScales = Object.keys(SCALE_CONFIG).filter(s => s !== ACTIVE_SCALE);
+        scaleLinksContainer.innerHTML = otherScales.map(scale => `
+            <a href="calculator.html?scale=${scale}" style="color: var(--accent); text-decoration: none; font-size: 0.88rem; font-weight: 600;" title="Open the ${scale} calculator">
+                Switch to ${scale} scale
+            </a>
+        `).join('');
     }
 });
 

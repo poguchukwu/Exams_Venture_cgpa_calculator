@@ -4,7 +4,7 @@
  */
 
 // Detect active scale from URL or default to 5.0
-const ACTIVE_SCALE = new URLSearchParams(window.location.search).get('scale') === '4.0' ? '4.0' : '5.0';
+const ACTIVE_SCALE = new URLSearchParams(window.location.search).get('scale') || '5.0';
 
 const SCALE_CONFIG = {
     '4.0': {
@@ -74,6 +74,43 @@ const SCALE_CONFIG = {
             hard: 4.0,
             elite: 4.5,
             impossible: 5.0
+        }
+    },
+    '7.0': {
+        maxGPA: 7.0,
+        defaultGrade: '7',
+        prefixes: {
+            data: 'data7-',
+            notes: 'notes-7-',
+            profile: 'student-profile-7',
+            pin: 'app7-pin',
+            onboarding: 'ev-onboarding-7-done'
+        },
+        grades: [
+            { value: '7', letter: 'A' },
+            { value: '6', letter: 'B' },
+            { value: '5', letter: 'C' },
+            { value: '4', letter: 'D' },
+            { value: '3', letter: 'E' },
+            { value: '2', letter: 'F' },
+            { value: '1', letter: 'G' },
+            { value: '0', letter: 'H' }
+        ],
+        gradeMap: { "7": "A", "6": "B", "5": "C", "4": "D", "3": "E", "2": "F", "1": "G", "0": "H" },
+        colors: { "7": "#4caf50", "6": "#2196f3", "5": "#ffc107", "4": "#ff9800", "3": "#f44336", "2": "#9e9e9e", "1": "#607d8b", "0": "#000000" },
+        boundaries: [
+            { threshold: 6.0, label: 'First Class', shortLabel: 'FC', nextThreshold: 7.0, nextLabel: 'Max GPA', nextShortLabel: 'MAX' },
+            { threshold: 4.5, label: '2nd Class Upper', shortLabel: '2.1', nextThreshold: 6.0, nextLabel: 'First Class', nextShortLabel: 'FC' },
+            { threshold: 3.0, label: '2nd Class Lower', shortLabel: '2.2', nextThreshold: 4.5, nextLabel: '2nd Class Upper', nextShortLabel: '2.1' },
+            { threshold: 1.5, label: 'Third Class', shortLabel: 'TC', nextThreshold: 3.0, nextLabel: '2nd Class Lower', nextShortLabel: '2.2' },
+            { threshold: 0, label: 'Pass', shortLabel: 'P', nextThreshold: 1.5, nextLabel: 'Third Class', nextShortLabel: 'TC' }
+        ],
+        totalDegreeUnits: 280,
+        chartMaxY: 7,
+        statusThresholds: {
+            hard: 5.5,
+            elite: 6.5,
+            impossible: 7.0
         }
     }
 };

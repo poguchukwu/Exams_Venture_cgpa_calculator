@@ -135,8 +135,9 @@
                     </div>
                 </div>
             </a>
-            <div class="nav-item" style="padding: 10px 16px; margin:4px 12px 12px; border:1px solid rgba(255,255,255,0.14); border-radius:10px; background: rgba(255,255,255,0.03); text-align:center;">
-                <a id="scale-switch-link" href="#" style="color: var(--accent); text-decoration: none; font-size: 0.88rem; font-weight: 600;"></a>
+            <div id="scale-switch-container" style="padding: 10px 16px; margin:4px 12px 12px; border:1px solid rgba(255,255,255,0.14); border-radius:10px; background: rgba(255,255,255,0.03); text-align:center;">
+                <p style="font-size: 0.75rem; color: var(--text-dim); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">Switch Grading System</p>
+                <div id="scale-links" style="display: flex; flex-direction: column; gap: 8px;"></div>
             </div>
 
             <div class="sidebar-links">
@@ -244,8 +245,8 @@
                 <h3>Academic History</h3>
             </div>
             <div class="semester-list" id="dynamic-sem-list"></div>
-            <button class="btn-secondary" onclick="exportToPDF()">Export Report (PDF)</button>
-            <button class="btn-secondary" onclick="exportBackupJSON()">Export Backup (JSON)</button>
+            <button class="btn-secondary" onclick="exportToPDF()" title="Download a professional PDF report of your academic performance, including all semesters and your overall CGPA.">Export Report (PDF)</button>
+            <button class="btn-secondary" onclick="exportBackupJSON()" title="Downloads a backup file (.json) containing your profile, courses, and notes. This file can be used to restore your data on another device or browser.">Export Backup (JSON)</button>
         </section>
 
         <section id="view-profile" class="view">
