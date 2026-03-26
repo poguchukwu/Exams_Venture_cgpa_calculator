@@ -8,12 +8,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="logo4.png">
-    <title>Exams Venture | Official CGPA Calculator & Exam Target Setter</title>
-    <meta name="description" content="The ultimate CGPA Calculator for all Nigerian Universities (4.0 & 5.0 scale). Track JAMB, WAEC, NECO, GCE, SAT scores and Post-UTME targets offline. Supports both 4.0 and 5.0 GPA scales.">
-    <meta name="keywords" content="CGPA Calculator, Nigeria University Grading System, 5.0 CGPA Scale, 4.0 CGPA Scale, JAMB Result Checker, WAEC Score Grade, NECO Result Calculator, SAT Nigeria, Post-UTME Target, Calculate GP, Carryover Tracker, 100 Level Exams, Engineering CGPA, Medical Student GP, UNILAG, UI, OAU, UNIBEN, UNN, LASU, BUK">
+    <title>Exams Venture | Best CGPA Calculator & Exam Target Setter</title>
+    <meta name="description" content="The ultimate CGPA Calculator for all Nigerian Universities (4.0, 5.0 & 7.0 scale). Track JAMB, WAEC, NECO, GCE, SAT scores and Post-UTME targets offline. Download the app now!">
+    <meta name="keywords" content="CGPA Calculator, Best CGPA Calculator, Nigeria University Grading System, 5.0 CGPA Scale, 4.0 CGPA Scale, 7.0 CGPA Scale, UI CGPA Calculator, UNILAG CGPA Calculator, OAU CGPA Calculator, JAMB Result Checker, WAEC Score Grade, NECO Result Calculator, SAT Nigeria, Post-UTME Target, Calculate GP, Carryover Tracker, 100 Level Exams, Engineering CGPA, Medical Student GP, UNIBEN, UNN, LASU, BUK, Download CGPA App">
 
-    <meta property="og:title" content="Exams Venture: Nigeria's #1 Student Academic Tool">
-    <meta property="og:description" content="Calculate your CGPA, set exam targets, and track your academic growth offline. For University, JAMB, and SSCE students. Supports both 4.0 and 5.0 scales.">
+    <meta property="og:title" content="Exams Venture: Nigeria's #1 Student Academic Tool & CGPA Calculator">
+    <meta property="og:description" content="Calculate your CGPA, set exam targets, and track your academic growth offline. For University, JAMB, and SSCE students. Supports 4.0, 5.0, and 7.0 scales.">
     <meta property="og:image" content="logo4.png">
     <meta property="og:type" content="website">
 
@@ -37,9 +37,9 @@
     }
     </script>
 
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#fbbf24">
-    <link rel="apple-touch-icon" href="/icon-192.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -385,6 +385,11 @@ IMAGE DATA: [Attached Image]</code>
         </div>
     </div>
 
+    <!-- App Installed Notification -->
+    <div id="install-notification" style="display:none; position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:var(--accent); color:#000; padding:12px 24px; border-radius:30px; font-weight:bold; box-shadow:0 4px 15px rgba(0,0,0,0.3); z-index:9999; animation: slideUp 0.5s ease-out;">
+        ✅ Download Finished! App Installed.
+    </div>
+
     <!-- Load config first, then main logic -->
     <script src="config.js"></script>
     <script src="main.js"></script>
@@ -392,11 +397,24 @@ IMAGE DATA: [Attached Image]</code>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
+                navigator.serviceWorker.register('sw.js')
                     .then(reg => console.log('Exams Venture PWA: Active'))
                     .catch(err => console.log('PWA Registration Failed: ', err));
             });
         }
+
+        // Handle App Installation Event
+        window.addEventListener('appinstalled', (evt) => {
+            console.log('App installed successfully');
+            const notification = document.getElementById('install-notification');
+            if (notification) {
+                notification.style.display = 'block';
+                setTimeout(() => {
+                    notification.style.animation = 'slideDown 0.5s ease-in forwards';
+                    setTimeout(() => notification.style.display = 'none', 500);
+                }, 4000); // Hide after 4 seconds
+            }
+        });
     </script>
 </body>
 </html>

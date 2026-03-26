@@ -105,6 +105,17 @@ body {
     border-radius: 2px;
 }
 
+/* Animations */
+@keyframes slideUp {
+    from { transform: translate(-50%, 100%); opacity: 0; }
+    to { transform: translate(-50%, 0); opacity: 1; }
+}
+
+@keyframes slideDown {
+    from { transform: translate(-50%, 0); opacity: 1; }
+    to { transform: translate(-50%, 100%); opacity: 0; }
+}
+
 /* 3. MAIN CONTENT CONTAINER */
 .app-container {
     width: 100%;
