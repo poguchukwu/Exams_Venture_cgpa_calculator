@@ -1,8 +1,9 @@
-const CACHE_NAME = 'ev-cgpa-cache-v6';
+const CACHE_NAME = 'ev-cgpa-cache-v7';
 const urlsToCache = [
     './',
     './index.html',
     './calculator.html',
+    './academic_guide.html',
     './about_app.html',
     './privacy_policy.html',
     './terms_and_conditions_ev.html',

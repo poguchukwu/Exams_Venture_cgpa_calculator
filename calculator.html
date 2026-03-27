@@ -37,13 +37,17 @@
     }
     </script>
 
+    <!-- GOOGLE ADSENSE AUTO-ADS -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#fbbf24">
     <link rel="apple-touch-icon" href="icon-192.png">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="ad-house" style="background: #020617; display: flex; align-items: center; justify-content: center; overflow: hidden; height: 60px;">
+    <div id="ad-house" style="background: #020617; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; min-height: 70px; padding: 5px 0;">
+        <small style="color: #484f58; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Advertisement</small>
         <div id="dynamic-ad-wrapper" style="width:100%; display:flex; justify-content:center;">
             <ins class="adsbygoogle"
                  style="display:block; width:320px; height:50px"
@@ -127,6 +131,14 @@
                     </div>
                 </div>
             </a>
+            <a href="academic_guide.html" class="nav-item-link">
+                <div class="nav-item">
+                    <span class="icon">📖</span>
+                    <div class="nav-text">
+                        <strong>Academic Guide</strong>
+                    </div>
+                </div>
+            </a>
             <a href="privacy_policy.html" class="nav-item-link">
                 <div class="nav-item">
                     <span class="icon">🔒</span>
@@ -141,7 +153,7 @@
             </div>
 
             <button class="pwa-install-trigger" id="sidebar-install-btn" onclick="triggerPWAInstall()">
-                <span class="icon">�</span>
+                <span class="icon">📲</span>
                 <span>INSTALL</span>
             </button>
 

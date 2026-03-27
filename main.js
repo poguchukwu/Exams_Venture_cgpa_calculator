@@ -1477,9 +1477,9 @@ async function triggerPWAInstall() {
         // Fallback: Manual Instructions (for iOS or delayed prompts)
         const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
         if (isIOS) {
-            alert("To study offline on iPhone/iPad:\n1. Tap the 'Share' icon (square with arrow) at the bottom.\n2. Scroll down and tap 'Add to Home Screen'.");
+            alert("To install on iPhone/iPad:\n1. Tap the 'Share' icon (square with arrow) at the bottom.\n2. Scroll down and tap 'Add to Home Screen'.");
         } else {
-            alert("To study offline:\n1. Open your browser menu (usually three dots ⋮).\n2. Tap 'Install App' or 'Add to Home Screen'.");
+            alert("To install:\n1. Open your browser menu (usually three dots ⋮).\n2. Tap 'Install App' or 'Add to Home Screen'.");
         }
     }
 }
