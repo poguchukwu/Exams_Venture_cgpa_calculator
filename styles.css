@@ -1038,6 +1038,15 @@ input, select, textarea {
     }
 }
 
+.pwa-install-trigger.faded {
+    opacity: 0.4;
+    filter: grayscale(1);
+    pointer-events: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-dim);
+    box-shadow: none;
+}
+
 /* ========== LIGHT THEME ========== */
 [data-theme="light"] {
     --bg: #f0f2f5;

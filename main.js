@@ -64,6 +64,8 @@ function switchView(viewId) {
         setTimeout(updateProjectedCGPA, 100);
     }
 
+    updatePWAInstallUI();
+
     const menu = document.getElementById("side-menu");
     if (menu && menu.classList.contains("active")) toggleSidebar();
     
@@ -1088,6 +1090,7 @@ function checkLogin() {
 
 function unlockApp() {
     switchView('view-dashboard');
+    updatePWAInstallUI();
     const topBar = document.querySelector('.top-bar');
     if (topBar) topBar.style.display = 'flex';
     document.getElementById('login-pin').value = '';
@@ -1425,13 +1428,25 @@ async function requestPersistentStorage() {
 function updatePWAInstallUI() {
     const installBtns = document.querySelectorAll('.pwa-install-trigger');
     const isStandalone = isAppInstalled();
+    const loginView = document.getElementById('view-login');
+    const isLoginActive = loginView && loginView.classList.contains('active');
     
     installBtns.forEach(btn => {
-        if (isStandalone) {
+        if (isLoginActive) {
             btn.style.display = 'none';
+            return;
+        }
+
+        btn.style.display = 'flex';
+        
+        if (isStandalone) {
+            btn.classList.add('faded');
+            const textSpan = btn.querySelector('span:not(.icon)');
+            if (textSpan) textSpan.textContent = 'INSTALLED';
         } else {
-            // Show if in browser, regardless of deferredPrompt (fallback to instructions)
-            btn.style.display = 'flex';
+            btn.classList.remove('faded');
+            const textSpan = btn.querySelector('span:not(.icon)');
+            if (textSpan) textSpan.textContent = 'INSTALL';
         }
     });
 }
