@@ -3,12 +3,16 @@
 <head>
     <script>(function(){var t=localStorage.getItem('ev-theme')||'dark';document.documentElement.setAttribute('data-theme',t);})();</script>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no, date=no, email=no, address=no">
     <link rel="icon" type="image/png" href="logo4.png">
     <title>Privacy Policy - Exams Venture</title>
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#fbbf24">
-<link rel="apple-touch-icon" href="/icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
     <style>
         :root {
             --bg: #0d1117;
@@ -22,7 +26,7 @@
             background-color: var(--bg);
             color: var(--text);
             line-height: 1.6;
-            padding: 20px;
+            padding: calc(20px + env(safe-area-inset-top, 0px)) calc(20px + env(safe-area-inset-right, 0px)) calc(20px + env(safe-area-inset-bottom, 0px)) calc(20px + env(safe-area-inset-left, 0px));
             max-width: 800px;
             margin: 0 auto;
         }
@@ -48,6 +52,11 @@
         [data-theme="light"] .policy-container { background: #fff; border-color: #e0e0e0; }
         [data-theme="light"] p, [data-theme="light"] li { color: #333; }
         [data-theme="light"] .back-btn { color: #b45309; }
+        @media (max-width: 600px) {
+            body { padding: calc(12px + env(safe-area-inset-top, 0px)) 12px calc(12px + env(safe-area-inset-bottom, 0px)); }
+            .policy-container { padding: 20px; border-radius: 10px; }
+            h1 { font-size: 1.45rem; }
+        }
     </style>
 </head>
 <body>

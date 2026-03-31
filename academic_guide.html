@@ -3,7 +3,11 @@
 <head>
     <script>(function(){var t=localStorage.getItem('ev-theme')||'dark';document.documentElement.setAttribute('data-theme',t);})();</script>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no, date=no, email=no, address=no">
     <link rel="icon" type="image/png" href="logo4.png">
     <title>Academic Guide: CGPA Calculation in Nigeria - Exams Venture</title>
     <link rel="manifest" href="manifest.json">
@@ -24,7 +28,7 @@
             background-color: var(--bg);
             color: var(--text);
             line-height: 1.8;
-            padding: 20px;
+            padding: calc(20px + env(safe-area-inset-top, 0px)) calc(20px + env(safe-area-inset-right, 0px)) calc(20px + env(safe-area-inset-bottom, 0px)) calc(20px + env(safe-area-inset-left, 0px));
             max-width: 900px;
             margin: 0 auto;
         }
@@ -68,7 +72,8 @@
         [data-theme="light"] .guide-container { box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
 
         @media (max-width: 600px) {
-            .guide-container { padding: 25px; }
+            body { padding: calc(12px + env(safe-area-inset-top, 0px)) 12px calc(12px + env(safe-area-inset-bottom, 0px)); }
+            .guide-container { padding: 20px; border-radius: 14px; }
             h1 { font-size: 1.8rem; }
         }
     </style>

@@ -237,6 +237,11 @@ function saveSemesterData() {
  */
 function updateDashboard() {
     const config = getConfig();
+    const displayCgpaEl = document.getElementById('display-cgpa');
+    const displayUnitsEl = document.getElementById('display-units');
+    const displayClassEl = document.getElementById('display-class');
+    if (!displayCgpaEl || !displayUnitsEl || !displayClassEl) return;
+
     let totalPoints = 0, totalUnits = 0;
 
     Object.keys(localStorage).filter(k => k.startsWith(config.prefixes.data)).forEach(key => {
@@ -249,8 +254,8 @@ function updateDashboard() {
 
     const cgpa = totalUnits > 0 ? (totalPoints / totalUnits).toFixed(2) : "0.00";
     
-    document.getElementById('display-cgpa').innerText = cgpa;
-    document.getElementById('display-units').innerText = totalUnits;
+    displayCgpaEl.innerText = cgpa;
+    displayUnitsEl.innerText = totalUnits;
 
     let degreeClass = "Pass";
     let nextBoundary = config.maxGPA;
@@ -265,7 +270,7 @@ function updateDashboard() {
         }
     }
 
-    document.getElementById('display-class').innerText = degreeClass;
+    displayClassEl.innerText = degreeClass;
 
     const gap = (nextBoundary - parseFloat(cgpa)).toFixed(2);
     const progressPercent = (parseFloat(cgpa) / config.maxGPA) * 100;
@@ -1094,7 +1099,7 @@ function unlockApp() {
     const topBar = document.querySelector('.top-bar');
     if (topBar) topBar.style.display = 'flex';
     document.getElementById('login-pin').value = '';
-    const adHouse = document.getElementById('ad-container-bottom');
+    const adHouse = document.getElementById('ad-house');
     if (adHouse) adHouse.style.display = 'block';
     const config = getConfig();
     if (!localStorage.getItem(getStorageKey('onboarding'))) showOnboarding();
@@ -1617,9 +1622,28 @@ function disableAllControls(shouldDisable) {
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
+    const registerServiceWorker = async () => {
+        if ('serviceWorker' in navigator) {
+            try {
+                const reg = await navigator.serviceWorker.register('sw.js');
+                console.log('Exams Venture PWA: Active', reg.scope);
+            } catch (err) {
+                console.log('PWA Registration Failed: ', err);
+            }
+        }
+    };
+
     // 1. Core State Initialization
     localStorage.setItem('ev-scale', ACTIVE_SCALE);
     initTheme();
+
+    const isCalculatorPage = !!document.getElementById('view-login') && !!document.getElementById('view-dashboard');
+    if (!isCalculatorPage) {
+        updatePWAInstallUI();
+        await registerServiceWorker();
+        return;
+    }
+
     populateSemesters();
     applyProfile();
     updateDashboard();
@@ -1640,7 +1664,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     if (loginView && loginView.classList.contains('active')) {
         const topBar = document.querySelector('.top-bar');
         if (topBar) topBar.style.display = 'none';
-        const adHouse = document.getElementById('ad-container-bottom');
+        const adHouse = document.getElementById('ad-house');
         if (adHouse) adHouse.style.display = 'none';
     }
 
@@ -1688,12 +1712,5 @@ window.addEventListener('DOMContentLoaded', async () => {
     updatePWAInstallUI();
 
     // 7. Service Worker Registration
-    if ('serviceWorker' in navigator) {
-        try {
-            const reg = await navigator.serviceWorker.register('sw.js');
-            console.log('Exams Venture PWA: Active', reg.scope);
-        } catch (err) {
-            console.log('PWA Registration Failed: ', err);
-        }
-    }
+    await registerServiceWorker();
 });

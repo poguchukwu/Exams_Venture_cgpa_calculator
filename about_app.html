@@ -3,12 +3,16 @@
 <head>
     <script>(function(){var t=localStorage.getItem('ev-theme')||'dark';document.documentElement.setAttribute('data-theme',t);})();</script>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no, date=no, email=no, address=no">
     <link rel="icon" type="image/png" href="logo4.png">
     <title>About | Exams Venture</title>
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#fbbf24">
-<link rel="apple-touch-icon" href="/icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -119,6 +123,21 @@
             text-transform: uppercase;
             letter-spacing: 2px;
         }
+        @media (max-width: 600px) {
+            body {
+                padding: 12px;
+            }
+            .about-container {
+                padding: 22px;
+                border-radius: 16px;
+            }
+            .features-list {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 1.45rem;
+            }
+        }
         [data-theme="light"] body { background: #f0f2f5; color: #1a1a1a; }
         [data-theme="light"] .about-container { background: #fff; border-color: #e0e0e0; }
         [data-theme="light"] .content-section p { color: #333; }
@@ -132,7 +151,7 @@
 <body>
 
     <div class="about-container">
-        <div class="ev-logo-badge"><img src="logo4.png" style="width: 100px; height: auto;"></div>
+        <div class="ev-logo-badge"><img src="logo4.png" style="width: 100%; max-width: 48px; height: auto;"></div>
         <h1>Exams Venture</h1>
         <span class="version">V1.0 • Built for Nigerian Students</span>
         

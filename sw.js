@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ev-cgpa-cache-v7';
+const CACHE_NAME = 'ev-cgpa-cache-v9';
 const urlsToCache = [
     './',
     './index.html',
