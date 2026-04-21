@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>(function(){var t=localStorage.getItem('ev-theme')||'dark';document.documentElement.setAttribute('data-theme',t);})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no, date=no, email=no, address=no">
+    <link rel="icon" type="image/png" href="logo4.png">
+    <title>Terms & Conditions | Exams Venture</title>
+    <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#fbbf24">
+<link rel="apple-touch-icon" href="icon-192.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0b0e14;
+            --card: #161b22;
+            --accent: #fbbf24;
+            --text: #ffffff;
+            --text-dim: #8b949e;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            padding: calc(40px + env(safe-area-inset-top, 0px)) calc(20px + env(safe-area-inset-right, 0px)) calc(20px + env(safe-area-inset-bottom, 0px)) calc(20px + env(safe-area-inset-left, 0px));
+            margin: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid #30363d;
+        }
+
+        h1 { color: var(--accent); font-size: 2rem; margin-bottom: 10px; }
+        h2 { color: var(--accent); font-size: 1.2rem; margin-top: 30px; border-bottom: 1px solid #30363d; padding-bottom: 10px; }
+        p { color: #d1d5db; font-size: 0.95rem; margin-bottom: 15px; }
+        
+        .last-updated { font-size: 0.8rem; color: var(--text-dim); margin-bottom: 30px; display: block; }
+
+        .btn-home {
+            display: inline-block;
+            margin-top: 40px;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            border: 1px solid var(--accent);
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .btn-home:hover { background: var(--accent); color: #000; }
+        [data-theme="light"] body { background: #f0f2f5; color: #1a1a1a; }
+        [data-theme="light"] .container { background: #fff; border-color: #e0e0e0; }
+        [data-theme="light"] p { color: #333; }
+        [data-theme="light"] .btn-home { border-color: #b45309; color: #b45309; }
+        [data-theme="light"] .btn-home:hover { background: #b45309; color: #fff; }
+        @media (max-width: 600px) {
+            body { padding: calc(14px + env(safe-area-inset-top, 0px)) 12px calc(12px + env(safe-area-inset-bottom, 0px)); }
+            .container { padding: 20px; border-radius: 14px; }
+            h1 { font-size: 1.5rem; }
+            h2 { font-size: 1.05rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Terms & Conditions</h1>
+        <span class="last-updated">Last Updated: March 2026</span>
+
+        <p>Welcome to <strong>Exams Venture</strong>. By using our 4.0 and 5.0 CGPA Calculators, you agree to the following terms. We’ve kept this simple and clear because we respect your time as a student.</p>
+
+        <h2>1. Accuracy of Calculations</h2>
+        <p>While we have built this tool to follow the standard Nigerian university grading systems (NUC standards), the results provided are for <strong>informational purposes only</strong>. Your official transcript issued by your University Senate is the only final authority on your academic standing.</p>
+
+        <h2>2. Data Privacy & Storage</h2>
+        <p>Your privacy is our priority. All data entered (Grades, Course Names, Names) is stored <strong>locally on your device</strong> via browser storage. We do not host your grades on our servers. If you clear your browser cache or delete site data, your saved semesters will be lost.</p>
+
+        <h2>3. Use of Google Ads</h2>
+        <p>To keep this tool free for every Nigerian student, we display advertisements via Google AdSense. By using the app while online, you acknowledge that third-party vendors may use cookies to serve ads based on your visits to this and other websites.</p>
+
+        <h2>4. User Responsibilities</h2>
+        <p>You agree not to attempt to reverse-engineer the calculator logic or use the platform for any fraudulent academic claims. The "Target Tracker" is a projection tool, not a guarantee of future performance.</p>
+
+        <h2>5. Intellectual Property</h2>
+        <p>The "Exams Venture" name, the custom "Elite" UI design, and the specific Target Tracker logic are the property of the developer. Unauthorized redistribution or cloning of this app for commercial gain is prohibited.</p>
+
+        <h2>6. Limitation of Liability</h2>
+        <p>Exams Venture shall not be held liable for any decisions made based on the calculations provided, including but not limited to course registration choices or scholarship applications.</p>
+
+        <a href="calculator.html?scale=5.0" class="btn-home" id="btn-home">Return to App</a>
+    </div>
+    <script>
+        (function(){
+            const scale = localStorage.getItem('ev-scale') || '5.0';
+            const back = document.getElementById('btn-home');
+            if (back) back.href = `calculator.html?scale=${scale}`;
+        })();
+    </script>
+
+</body>
+</html>

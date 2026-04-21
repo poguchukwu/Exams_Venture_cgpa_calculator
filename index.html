@@ -1,340 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script>(function(){var t=localStorage.getItem('ev-theme')||'dark';document.documentElement.setAttribute('data-theme',t);})();</script>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="format-detection" content="telephone=no, date=no, email=no, address=no">
-    <link rel="icon" type="image/png" href="logo4.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGPA Calculator Nigeria, JAMB & Exam Tools | Exams Venture</title>
+    <meta name="description" content="Exams Venture helps Nigerian students calculate CGPA, understand GPA scales, and plan for university admission, JAMB, WAEC, NECO, Post-UTME, and exam success across Nigeria.">
+    <meta name="theme-color" content="#1761d1">
+        <meta name="keywords" content="CGPA calculator Nigeria, GPA calculator Nigeria, university grading system Nigeria, JAMB preparation, JAMB score planner, WAEC guide Nigeria, NECO guide Nigeria, Post-UTME preparation, admission screening Nigeria, Nigerian university calculator, student success platform, academic planning Nigeria, result tracker, exam planner, first class CGPA, semester GPA, CGPA calculator, grades calculator, university admission guide, Exams Venture">
+        <meta name="robots" content="index, follow, max-image-preview:large">
+        <link rel="canonical" href="https://examsventure.com.ng/">
 
-    <title>Exams Venture | Best CGPA Calculator & Exam Target Setter</title>
-    <meta name="description" content="The ultimate CGPA Calculator for all Nigerian Universities (4.0, 5.0 & 7.0 scale). Track JAMB, WAEC, NECO, GCE, SAT scores and Post-UTME targets offline. Download the app now!">
-    <meta name="keywords" content="CGPA Calculator, Best CGPA Calculator, Nigeria University Grading System, 5.0 CGPA Scale, 4.0 CGPA Scale, 7.0 CGPA Scale, UI CGPA Calculator, UNILAG CGPA Calculator, OAU CGPA Calculator, JAMB Result Checker, WAEC Score Grade, NECO Result Calculator, SAT Nigeria, Post-UTME Target, Calculate GP, Carryover Tracker, 100 Level Exams, Engineering CGPA, Medical Student GP, UNIBEN, UNN, LASU, BUK, Download CGPA App">
+        <!-- Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-W9HYMXQXZP"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-W9HYMXQXZP');
+        </script>
 
-    <meta property="og:title" content="Exams Venture: Nigeria's #1 Student Academic Tool & CGPA Calculator">
-    <meta property="og:description" content="Calculate your CGPA, set exam targets, and track your academic growth offline. For University, JAMB, and SSCE students. Supports 4.0, 5.0, and 7.0 scales.">
-    <meta property="og:image" content="logo4.png">
-    <meta property="og:type" content="website">
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="Exams Venture">
+        <meta property="og:locale" content="en_NG">
+        <meta property="og:title" content="Exams Venture | Academic Tools Platform">
+        <meta property="og:description" content="Use Exams Venture tools to calculate CGPA, plan your semester, and make smarter academic decisions.">
+        <meta property="og:url" content="https://examsventure.com.ng/">
+        <meta property="og:image" content="https://examsventure.com.ng/cgpa_calculator/logo4.png">
 
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "Exams Venture",
-      "operatingSystem": "Android, iOS, Windows",
-      "applicationCategory": "EducationApplication",
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "ratingCount": "1000"
-      },
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "NGN"
-      }
-    }
-    </script>
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Exams Venture | Academic Tools Platform">
+        <meta name="twitter:description" content="Calculate CGPA, track progress, and improve study outcomes with Exams Venture.">
+        <meta name="twitter:image" content="https://examsventure.com.ng/cgpa_calculator/logo4.png">
+        <meta name="twitter:site" content="@examsventure">
 
-    <!-- GOOGLE ADSENSE AUTO-ADS -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#fbbf24">
-    <link rel="apple-touch-icon" href="icon-192.png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #0b0e14;
-            --card: rgba(22, 27, 34, 0.7);
-            --accent: #fbbf24; /* Your UI/EEE Gold */
-            --text: #ffffff;
-            --glass-border: rgba(251, 191, 36, 0.2);
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-
-        body {
-            background-color: var(--bg);
-            /* Subtle animated gradient background for depth */
-            background: radial-gradient(circle at top right, #1e293b 0%, #0b0e14 100%);
-            color: var(--text);
-            font-family: 'Inter', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            overflow-x: hidden;
-            overflow-y: auto;
-            padding: 40px 0;
-        }
-
-        .header-section {
-            text-align: center;
-            margin-bottom: 40px;
-            animation: fadeIn 0.8s ease-out;
-        }
-
-        .logo {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--accent);
-            letter-spacing: -1px;
-            margin-bottom: 8px;
-        }
-
-        .subtitle {
-            color: #8b949e;
-            font-size: 1rem;
-            font-weight: 400;
-        }
-
-        .selection-grid {
-            display: flex;
-            gap: 20px;
-            padding: 20px;
-            max-width: 600px;
-            width: 90%;
-            animation: slideUp 0.6s ease-out;
-        }
-
-        .scale-card {
-            flex: 1;
-            background: var(--card);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 40px 20px;
-            text-align: center;
-            text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Hover Effects */
-        .scale-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 
-                        0 0 15px rgba(251, 191, 36, 0.1);
-            background: rgba(30, 41, 59, 0.8);
-        }
-
-        .scale-card::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(251, 191, 36, 0.05) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .scale-card:hover::after { opacity: 1; }
-
-        .scale-num {
-            display: block;
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: var(--accent);
-            margin-bottom: 10px;
-        }
-
-        .scale-label {
-            display: block;
-            font-size: 1rem;
-            font-weight: 600;
-            color: #f0f6fc;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .scale-desc {
-            display: block;
-            margin-top: 8px;
-            font-size: 0.8rem;
-            color: #8b949e;
-        }
-
-        .badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(251, 191, 36, 0.1);
-            color: var(--accent);
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.65rem;
-            font-weight: 700;
-            border: 1px solid var(--glass-border);
-        }
-
-        .footer-note {
-            margin-top: 50px;
-            font-size: 0.75rem;
-            color: #484f58;
-            letter-spacing: 0.5px;
-            opacity: 0.7;
-            margin-bottom: 20px;
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Mobile Adjustments */
-        @media (max-width: 480px) {
-            .selection-grid { 
-                flex-direction: column; 
-                gap: 15px;
-                padding: 10px;
-                width: 95%;
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Exams Venture",
+            "url": "https://examsventure.com.ng/",
+            "description": "A platform of academic tools and student-focused resources including CGPA calculators and exam planning guides.",
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://examsventure.com.ng/?q={search_term_string}",
+                "query-input": "required name=search_term_string"
             }
-            .scale-card { 
-                padding: 25px 15px; 
-            }
-            .logo { font-size: 1.6rem; }
-            .subtitle { font-size: 0.9rem; }
         }
-        /* Light theme */
-        [data-theme="light"] body { background: #f0f2f5; color: #1a1a1a; }
-        [data-theme="light"] .subtitle { color: #5f6368; }
-        [data-theme="light"] .scale-card { background: rgba(255,255,255,0.9); border-color: rgba(0,0,0,0.1); }
-        [data-theme="light"] .scale-card:hover { background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        [data-theme="light"] .scale-desc { color: #5f6368; }
-        [data-theme="light"] .footer-note { color: #5f6368; }
-        .theme-toggle-link { position: fixed; top: 15px; right: 15px; padding: 8px 14px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: var(--accent); font-size: 0.8rem; cursor: pointer; text-decoration: none; z-index: 100; }
-        .theme-toggle-link:hover { background: rgba(251,191,36,0.2); }
-        [data-theme="light"] .theme-toggle-link { background: rgba(0,0,0,0.05); border-color: #e0e0e0; color: #b45309; }
-
-        /* Offline Lockout Styles */
-        .offline-lockout-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 9998;
+        </script>
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Exams Venture",
+            "url": "https://examsventure.com.ng/",
+            "logo": "https://examsventure.com.ng/cgpa_calculator/logo4.png"
         }
-
-        .offline-lockout-overlay.active {
-            display: flex;
+        </script>
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "name": "Exams Venture Academic Tools",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "CGPA Calculator",
+                    "url": "https://examsventure.com.ng/cgpa_calculator/"
+                }
+            ]
         }
-
-        .offline-lockout-card {
-            background: var(--card);
-            border: 1px solid #ff6b6b;
-            border-radius: 20px;
-            padding: 40px 30px;
-            max-width: 380px;
-            width: 90%;
-            text-align: center;
-            box-shadow: 0 10px 40px rgba(255, 107, 107, 0.3);
-            animation: slideUp 0.4s ease-out;
+        </script>
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "Does Exams Venture have a CGPA calculator for Nigerian universities?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes. Exams Venture provides a free CGPA calculator that supports common 4.0, 5.0, and 7.0 grading systems used in Nigerian institutions."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Can this platform help with JAMB, WAEC, and Post-UTME planning?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes. In addition to CGPA tracking, Exams Venture publishes student-friendly academic guidance for exam preparation and planning."
+                    }
+                }
+            ]
         }
-
-        .offline-lockout-icon {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-        }
-
-        .offline-lockout-card h2 {
-            font-size: 1.5rem;
-            color: #ff6b6b;
-            margin-bottom: 12px;
-        }
-
-        .offline-lockout-card p {
-            font-size: 0.9rem;
-            color: var(--text);
-            line-height: 1.5;
-            margin-bottom: 12px;
-        }
-
-        .offline-lockout-hint {
-            font-size: 0.8rem;
-            color: #8b949e;
-            font-style: italic;
-        }
-
-        [data-theme="light"] .offline-lockout-card { background: #fff !important; }
-        [data-theme="light"] .offline-lockout-card p { color: #1a1a1a; }
-    </style>
+        </script>
+    <link rel="icon" href="cgpa_calculator/logo4.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="bg-orb orb-one" aria-hidden="true"></div>
+<div class="bg-orb orb-two" aria-hidden="true"></div>
+<div class="bg-grid" aria-hidden="true"></div>
 
-    <div class="header-section">
-        <div class="logo">Exams Venture <br>CGPA Calculator</div>
-        <p class="subtitle">Choose your academic grading system</p>
-    </div>
-
-    <div class="selection-grid">
-        <a href="calculator.html?scale=4.0" class="scale-card">
-            <span class="scale-num">4.0</span>
-            <span class="scale-label"></span>
-            <span class="scale-desc">4-Point Grade Scale</span>
-        </a>
-
-        <a href="calculator.html?scale=5.0" class="scale-card">
-            <span class="scale-num">5.0</span>
-            <span class="scale-label"></span>
-            <span class="scale-desc">5-Point Grade Scale</span>
-        </a>
-
-        <a href="calculator.html?scale=7.0" class="scale-card">
-            <span class="scale-num">7.0</span>
-            <span class="scale-label"></span>
-            <span class="scale-desc">7-Point Grade Scale</span>
-        </a>
-    </div>
-
-    <div class="footer-note">
-        Designed for Nigerian University Standards
-    </div>
-
-    <a href="#" class="theme-toggle-link" onclick="evToggleTheme();return false;" id="choice-theme-btn">☀️ Light</a>
-
-    <!-- Offline Lockout Overlay -->
-    <div id="offline-lockout" class="offline-lockout-overlay" style="display:none;">
-        <div class="offline-lockout-card">
-            <div class="offline-lockout-icon">🔌</div>
-            <h2>Connection Expired</h2>
-            <p>You've been offline for 5 minutes. Please connect to the internet to continue using Exams Venture.</p>
-            <p class="offline-lockout-hint">Your data is safe and will sync once you're back online.</p>
+<main class="shell">
+    <header class="topbar reveal">
+        <div class="header-logo-section">
+            <img src="cgpa_calculator/logo4.png" alt="Exams Venture Logo" class="logo-img">
+            <p class="brand">Exams Venture</p>
         </div>
-    </div>
+        <a class="mini-link" href="cgpa_calculator/index.html">Open Calculator</a>
+    </header>
 
-    <script src="config.js"></script>
-    <script src="main.js"></script>
-<script>
-      function evToggleTheme(){
-        var c=document.documentElement.getAttribute('data-theme')||'dark';
-        var n=c==='dark'?'light':'dark';
-        document.documentElement.setAttribute('data-theme',n);
-        localStorage.setItem('ev-theme',n);
-        document.getElementById('choice-theme-btn').textContent=n==='dark'?'☀️ Light':'🌙 Dark';
-      }
-      (function(){var t=localStorage.getItem('ev-theme')||'dark';var b=document.getElementById('choice-theme-btn');if(b)b.textContent=t==='dark'?'☀️ Light':'🌙 Dark';})();
-    </script>
-    
+    <section class="hero reveal delay-1">
+        <p class="kicker">Student Success Hub</p>
+        <h1>Simple tools. <span>Serious results.</span></h1>
+        <p class="subtitle">Calculate CGPA fast with a Nigerian CGPA calculator and access practical guides for JAMB, WAEC, NECO, Post-UTME, and university admission planning in one clean experience.</p>
+
+        <div class="cta-row">
+            <a href="cgpa_calculator/index.html" class="btn btn-primary">Start CGPA Calculator</a>
+        </div>
+    </section>
+
+    <section class="feature-panel reveal delay-2" aria-label="Quick access">
+        <article class="feature-card active">
+            <p class="chip">Core Tool</p>
+            <h2>CGPA Calculator</h2>
+            <p>Supports 4.0, 5.0, and 7.0 grading scales for Nigerian students who want a GPA tracker, result calculator, and semester target planner.</p>
+            <a href="cgpa_calculator/index.html" class="text-link">Open now</a>
+        </article>
+
+        <article class="feature-card">
+            <p class="chip">Top Guides</p>
+            <h2>Admission and Exam Strategy</h2>
+            <p>Find guidance for JAMB cut-off marks, WAEC grading system, Post-UTME preparation, NECO planning, and exam success in Nigeria.</p>
+            <ul>
+                <li><a class="text-link" href="jamb-cut-off-marks-guide.html">JAMB Cut-Off Marks</a></li>
+                <li><a class="text-link" href="waec-grading-system-guide.html">WAEC Grading System</a></li>
+                <li><a class="text-link" href="post-utme-preparation-guide.html">Post-UTME Preparation</a></li>
+            </ul>
+        </article>
+    </section>
+
+    <section class="site-meta reveal delay-3" aria-label="Website details">
+        <article>
+            <h3>Built for Nigerian students.</h3>
+            <p>One modern platform for CGPA calculation, GPA tracking, university admission support, and practical exam guidance for students across Nigeria.</p>
+        </article>
+        <a class="btn btn-ghost" href="how-to-improve-cgpa-fast.html">Improve Your CGPA</a>
+    </section>
+
+    <footer class="site-footer reveal delay-3">
+        <div class="footer-grid">
+            <section>
+                <p class="footer-title">Exams Venture</p>
+                <p class="footer-copy">Elite simplicity for CGPA, GPA, JAMB, WAEC, NECO, and Post-UTME planning.</p>
+            </section>
+
+            <section>
+                <p class="footer-title">Navigation</p>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="cgpa_calculator/index.html">Featured App: CGPA Calculator</a></li>
+                    <li><a href="jamb-cut-off-marks-guide.html">JAMB Cut-Off Marks Guide</a></li>
+                    <li><a href="waec-grading-system-guide.html">WAEC Grading System Guide</a></li>
+                    <li><a href="post-utme-preparation-guide.html">Post-UTME Preparation Guide</a></li>
+                </ul>
+            </section>
+
+            <section>
+                <p class="footer-title">Contact</p>
+                <ul class="footer-links">
+                    <li><a href="mailto:support@examsventure.com">support@examsventure.com</a></li>
+                    <li><a href="mailto:hello@examsventure.com">hello@examsventure.com</a></li>
+                    <li><a href="tel:+2347026984007">0702 698 4007</a></li>
+                </ul>
+            </section>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Exams Venture. All rights reserved.</p>
+            <p>Simple, elegant, and effective.</p>
+        </div>
+    </footer>
+</main>
 </body>
 </html>

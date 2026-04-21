@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>(function(){var t=localStorage.getItem('ev-theme')||'dark';document.documentElement.setAttribute('data-theme',t);})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no, date=no, email=no, address=no">
+    <link rel="icon" type="image/png" href="logo4.png">
+    <title>Privacy Policy - Exams Venture</title>
+    <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#fbbf24">
+<link rel="apple-touch-icon" href="icon-192.png">
+    <style>
+        :root {
+            --bg: #0d1117;
+            --card: #161b22;
+            --accent: #fbbf24;
+            --text: #e6edf3;
+            --dim: #8b949e;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: calc(20px + env(safe-area-inset-top, 0px)) calc(20px + env(safe-area-inset-right, 0px)) calc(20px + env(safe-area-inset-bottom, 0px)) calc(20px + env(safe-area-inset-left, 0px));
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .policy-container {
+            background: var(--card);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #30363d;
+        }
+        h1, h2 { color: var(--accent); }
+        h1 { font-size: 1.8rem; border-bottom: 1px solid #30363d; padding-bottom: 10px; }
+        h2 { font-size: 1.2rem; margin-top: 25px; }
+        p, li { color: var(--text); font-size: 0.95rem; }
+        .highlight { color: var(--accent); font-weight: bold; }
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        [data-theme="light"] body { background: #f0f2f5; color: #1a1a1a; }
+        [data-theme="light"] .policy-container { background: #fff; border-color: #e0e0e0; }
+        [data-theme="light"] p, [data-theme="light"] li { color: #333; }
+        [data-theme="light"] .back-btn { color: #b45309; }
+        @media (max-width: 600px) {
+            body { padding: calc(12px + env(safe-area-inset-top, 0px)) 12px calc(12px + env(safe-area-inset-bottom, 0px)); }
+            .policy-container { padding: 20px; border-radius: 10px; }
+            h1 { font-size: 1.45rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="calculator.html?scale=5.0" class="back-btn">← Back to App</a>
+
+    <div class="policy-container">
+        <h1>Privacy Policy</h1>
+        <p>Last Updated: March 2026</p>
+
+        <p>At <span class="highlight">Exams Venture</span>, we believe your academic data is your business. This policy explains how our CGPA Calculator handles your information.</p>
+
+        <h2>1. Data Collection & Storage</h2>
+        <p>We do <strong>not</strong> collect, store, or share your personal academic data on any external servers. All information you enter—including course codes, units, and grades—is stored strictly on your device using <span class="highlight">Local Storage</span>.</p>
+        <ul>
+            <li>Your data never leaves your phone or computer.</li>
+            <li>If you clear your browser cache or delete the app, your data will be permanently removed.</li>
+        </ul>
+
+        <h2>2. Google AdSense & Cookies</h2>
+        <p>To keep this tool free, we use Google AdSense to serve advertisements. Google may use cookies to serve ads based on your prior visits to this or other websites.</p>
+        <ul>
+            <li>Google's use of advertising cookies enables it and its partners to serve ads to you based on your visit to our sites.</li>
+            <li>You may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" style="color:var(--accent);">Ads Settings</a>.</li>
+        </ul>
+
+        <h2>3. Third-Party Services</h2>
+        <p>Apart from Google AdSense, we do not use any third-party tracking or analytics that monitor your behavior inside the app.</p>
+
+        <h2>4. Your Consent</h2>
+        <p>By using the Exams Venture CGPA Calculator, you consent to our storage of your data on your local device and the display of advertisements as described above.</p>
+
+        <h2>5. Contact Us</h2>
+        <p>If you have questions about this policy, you can reach out to the Exams Venture development team through our official channels.</p>
+        <a href="https://wa.me/qr/MHSRA5DBU5XSF1" target="_blank" style="color:var(--accent);">Contact Us on WhatsApp</a>
+    </div>
+    <script>
+        (function(){
+            const scale = localStorage.getItem('ev-scale') || '5.0';
+            const back = document.querySelector('.back-btn');
+            if (back) back.href = `calculator.html?scale=${scale}`;
+        })();
+    </script>
+
+</body>
+</html>

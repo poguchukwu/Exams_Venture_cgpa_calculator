@@ -1,0 +1,43 @@
+{
+  "hosting": {
+    "public": ".",
+    "cleanUrls": true,
+    "redirects": [
+      {
+        "source": "/cgpa-calculator",
+        "destination": "/cgpa_calculator/index.html",
+        "type": 301
+      },
+      {
+        "source": "/cgpa-calculator-guide",
+        "destination": "/cgpa_calculator/academic_guide.html",
+        "type": 301
+      },
+      {
+        "source": "/jamb-cut-off-marks-guide",
+        "destination": "/jamb-cut-off-marks-guide.html",
+        "type": 301
+      },
+      {
+        "source": "/waec-grading-system-guide",
+        "destination": "/waec-grading-system-guide.html",
+        "type": 301
+      },
+      {
+        "source": "/post-utme-preparation-guide",
+        "destination": "/post-utme-preparation-guide.html",
+        "type": 301
+      },
+      {
+        "source": "/how-to-improve-cgpa-fast",
+        "destination": "/how-to-improve-cgpa-fast.html",
+        "type": 301
+      }
+    ],
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
