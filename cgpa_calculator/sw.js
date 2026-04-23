@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ev-cgpa-cache-v10';
+const CACHE_NAME = 'ev-cgpa-cache-v12';
 const urlsToCache = [
     './',
     './index.html',
@@ -11,8 +11,8 @@ const urlsToCache = [
     './config.js',
     './main.js',
     './logo4.png',
-    './icon-192.png',
-    './icon-512.png',
+    './icon-192-padded.png',
+    './icon-512-padded.png',
     './manifest.json'
 ];
 
@@ -48,6 +48,22 @@ self.addEventListener('fetch', event => {
     const requestUrl = new URL(event.request.url);
     if (requestUrl.origin !== self.location.origin) {
         event.respondWith(fetch(event.request));
+        return;
+    }
+
+    // Use network-first for HTML/doc requests so deployments show immediately.
+    if (event.request.mode === 'navigate' || (event.request.headers.get('accept') || '').includes('text/html')) {
+        event.respondWith(
+            fetch(event.request)
+                .then(networkResponse => {
+                    if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
+                        const responseClone = networkResponse.clone();
+                        caches.open(CACHE_NAME).then(cache => cache.put(event.request, responseClone));
+                    }
+                    return networkResponse;
+                })
+                .catch(() => caches.match(event.request))
+        );
         return;
     }
 

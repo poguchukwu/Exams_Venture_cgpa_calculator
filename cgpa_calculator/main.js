@@ -85,6 +85,11 @@ function updateThemeButton(theme) {
     if (btn) btn.textContent = theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
 }
 
+function readThemeVar(name, fallback) {
+    const value = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    return value || fallback;
+}
+
 function bootAdSenseWhenReady() {
     const adHouse = document.getElementById('ad-house');
     if (!adHouse || adHouse.style.display === 'none') return;
@@ -394,6 +399,8 @@ let gradeDistChartInstance = null;
 function renderGpaTrendChart() {
     if (!window.Chart) return;
     const config = getConfig();
+    const textDim = readThemeVar('--text-dim', '#b8c7db');
+    const grid = readThemeVar('--line', 'rgba(148, 163, 184, 0.2)');
     const keys = Object.keys(localStorage).filter(k => k.startsWith(config.prefixes.data)).sort();
     const canvas = document.getElementById('gpa-trend-chart');
     const emptyMsg = document.getElementById('gpa-chart-empty');
@@ -463,14 +470,14 @@ function renderGpaTrendChart() {
             },
             scales: {
                 x: {
-                    grid: { color: 'rgba(255,255,255,0.06)' },
-                    ticks: { color: '#8b949e', maxRotation: 45, fontSize: 10 }
+                    grid: { color: grid },
+                    ticks: { color: textDim, maxRotation: 45, fontSize: 10 }
                 },
                 y: {
                     min: 0,
                     max: config.chartMaxY,
-                    grid: { color: 'rgba(255,255,255,0.06)' },
-                    ticks: { color: '#8b949e', fontSize: 10 }
+                    grid: { color: grid },
+                    ticks: { color: textDim, fontSize: 10 }
                 }
             }
         }
@@ -480,6 +487,8 @@ function renderGpaTrendChart() {
 function renderGradeDistributionChart() {
     if (!window.Chart) return;
     const config = getConfig();
+    const textDim = readThemeVar('--text-dim', '#b8c7db');
+    const chartBorder = readThemeVar('--card', '#111d2f');
     const unitCount = {};
     config.grades.forEach(g => unitCount[g.value] = 0);
 
@@ -522,13 +531,13 @@ function renderGradeDistributionChart() {
     const ctx = canvas.getContext('2d');
     gradeDistChartInstance = new Chart(ctx, {
         type: 'doughnut',
-        data: { labels, datasets: [{ data, backgroundColor: bgColors, borderColor: '#161b22', borderWidth: 2 }] },
+        data: { labels, datasets: [{ data, backgroundColor: bgColors, borderColor: chartBorder, borderWidth: 2 }] },
         options: {
             responsive: true,
             maintainAspectRatio: false,
             cutout: '60%',
             plugins: {
-                legend: { position: 'bottom', labels: { color: '#8b949e', font: { size: 10 }, boxWidth: 12 } }
+                legend: { position: 'bottom', labels: { color: textDim, font: { size: 10 }, boxWidth: 12 } }
             }
         }
     });
@@ -646,8 +655,8 @@ function calculateTarget() {
     if (currentCGPA >= (config.maxGPA - 0.5)) greeting = "First Class Scholar in the building! 🚀";
     else if (currentCGPA >= (config.maxGPA - 1)) greeting = "Solid work so far! Let's push higher. 🙌";
 
-    let html = `<h2 style="color:var(--accent); font-size:1.2rem; margin-bottom:10px;">${greeting}</h2>`;
-    html += `<p style="font-size:0.85rem; line-height:1.5; color:#e6edf3;">
+    let html = `<h2 class="target-audit-title">${greeting}</h2>`;
+    html += `<p class="target-audit-intro">
                 I've audited your <b>${currentUnits} units</b> of history with ADVANCED ANALYTICS enabled. 
                 With <b>${asCount} As</b>, <b>${bsCount} Bs</b>, and <b>${csCount} Cs</b> secured, here is your INTELLIGENT roadmap to a <b>${goal} CGPA</b>.
              </p>`;
@@ -658,33 +667,33 @@ function calculateTarget() {
     else if (requiredGPA > config.statusThresholds.hard) statusTheme = { label: "HARD MODE", color: "#60a5fa", msg: "Consistent high performance is mandatory." };
 
     html += `
-        <div style="background:rgba(255,255,255,0.05); padding:15px; border-radius:12px; margin:20px 0; border:1px solid rgba(255,255,255,0.1); position:relative; overflow:hidden;">
-            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+        <div class="target-status-card">
+            <div class="target-status-head">
                 <div>
-                    <small style="color:var(--text-dim); font-size:0.7rem; text-transform:uppercase; letter-spacing:1px;">Current Standing</small>
-                    <p style="font-size:2.2rem; font-weight:bold; margin:0;">${currentCGPA}</p>
+                    <small class="target-micro-label">Current Standing</small>
+                    <p class="target-standing-value">${currentCGPA}</p>
                 </div>
-                <span style="background:${statusTheme.color}; color:#000; padding:4px 10px; border-radius:6px; font-size:0.65rem; font-weight:bold;">${statusTheme.label}</span>
+                <span class="target-pill" style="--pill-color:${statusTheme.color};">${statusTheme.label}</span>
             </div>
-            <p style="font-size:0.75rem; margin-top:10px; color:${statusTheme.color};"><i>"${statusTheme.msg}"</i></p>
+            <p class="target-status-note" style="--status-color:${statusTheme.color};"><i>"${statusTheme.msg}"</i></p>
         </div>
     `;
 
     // NEW: Smart Analytics Dashboard
     html += `
-        <div style="background:#161b22; padding:12px; border-radius:12px; margin:16px 0; border:1px solid #30363d;">
-            <h4 style="color:var(--accent); font-size:0.9rem; margin-bottom:10px;">⚡ SMART ANALYTICS DASHBOARD</h4>
-            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; font-size:0.75rem;">
-                <div style="background:rgba(52,211,153,0.05); padding:8px; border-radius:8px; border-left:2px solid ${velocityColor};">
-                    <small style="color:var(--text-dim); display:block;">Performance Trend</small>
+        <div class="target-analytics-card">
+            <h4 class="target-analytics-title">⚡ SMART ANALYTICS DASHBOARD</h4>
+            <div class="target-analytics-grid">
+                <div class="target-analytics-item" style="--metric-color:${velocityColor}; --metric-bg:rgba(52,211,153,0.08);">
+                    <small class="target-metric-label">Performance Trend</small>
                     <b style="color:${velocityColor};">${gpaVelocity}</b>
                 </div>
-                <div style="background:rgba(96,165,250,0.05); padding:8px; border-radius:8px; border-left:2px solid ${predictColor};">
-                    <small style="color:var(--text-dim); display:block;">Consistency Score</small>
+                <div class="target-analytics-item" style="--metric-color:${predictColor}; --metric-bg:rgba(96,165,250,0.08);">
+                    <small class="target-metric-label">Consistency Score</small>
                     <b style="color:${predictColor};">${predictability}</b>
                 </div>
-                <div style="background:rgba(139,166,246,0.05); padding:8px; border-radius:8px; border-left:2px solid #8ba6f6;">
-                    <small style="color:var(--text-dim); display:block;">Success Probability</small>
+                <div class="target-analytics-item" style="--metric-color:#8ba6f6; --metric-bg:rgba(139,166,246,0.08);">
+                    <small class="target-metric-label">Success Probability</small>
                     <b style="color:#8ba6f6;">${Math.round(successProbability)}% Likely ✓</b>
                 </div>
             </div>
@@ -693,16 +702,16 @@ function calculateTarget() {
 
     if (requiredGPA > config.maxGPA) {
         html += `
-            <div style="background:rgba(255,68,68,0.05); padding:15px; border-radius:10px; border-left:4px solid #ff4444; margin-bottom: 15px;">
-                <p style="font-weight:bold; color:#ff4444; margin-bottom:8px; font-size: 0.9rem;">System Reality Check</p>
-                <p style="font-size:0.8rem; line-height:1.5; color:#e6edf3;">
+            <div class="target-alert-danger">
+                <p class="target-alert-title danger">System Reality Check</p>
+                <p class="target-alert-copy">
                     To reach a ${goal}, you'd need to average a <b>${requiredGPA} GPA</b>. Since the max is ${config.maxGPA}, this target is not possible.
                 </p>
             </div>
             
-            <div style="background:#1c2128; padding:15px; border-radius:10px; border:1px solid var(--accent);">
-                <p style="font-size:0.8rem; font-weight:bold; color:var(--accent); margin-bottom:5px;">Your New Max Potential</p>
-                <p style="font-size:0.85rem; line-height:1.4;">
+            <div class="target-alert-neutral">
+                <p class="target-alert-title">Your New Max Potential</p>
+                <p class="target-alert-copy">
                     If you secure a perfect ${config.maxGPA} in every remaining course, you will graduate with a <b>${maxPossibleCGPA} CGPA</b>.
                 </p>
             </div>`;
@@ -763,35 +772,35 @@ function calculateTarget() {
             .map(c => c.code);
 
         html += `
-            <h3 style="font-size:1rem; margin-bottom:12px; color:var(--accent); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px;">🎮 INTELLIGENT STRATEGY ENGINE</h3>
-            <p style="font-size:0.85rem; margin-bottom:15px;">
+            <h3 class="target-engine-title">🎮 INTELLIGENT STRATEGY ENGINE</h3>
+            <p class="target-engine-intro">
                 You must maintain an average of <b>${requiredGPA} GPA</b> across <b>${remainingUnits} units</b>. 
                 The system analyzed ${courseHistory.length} past courses to build personalized strategies.
             </p>
 
-            <div style="background:#161b22; padding:14px; border-radius:12px; border:1px solid #30363d; margin-bottom:16px;">
-                <p style="font-size:0.75rem; font-weight:bold; margin-bottom:12px; color:#fbbf24; text-transform:uppercase; letter-spacing:0.5px;">📊 THREE STRATEGIC PATHWAYS</p>
-                <div style="display:grid; gap:10px;">
+            <div class="target-strategy-card">
+                <p class="target-strategy-title">📊 THREE STRATEGIC PATHWAYS</p>
+                <div class="target-strategy-grid">
         `;
         
         scenarios.forEach(s => {
             html += `
-                <div style="background:rgba(255,255,255,0.02); padding:12px; border-radius:8px; border:1px solid #30363d; border-left:3px solid ${s.riskColor};">
-                    <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                        <div style="flex:1;">
-                            <p style="margin:0; font-size:0.85rem; font-weight:bold; color:#fff;">${s.name}</p>
-                            <small style="color:var(--text-dim); display:block; margin-top:4px;">${s.description}</small>
+                <div class="target-strategy-item" style="--risk-color:${s.riskColor};">
+                    <div class="target-strategy-head">
+                        <div class="target-strategy-copy">
+                            <p class="target-strategy-name">${s.name}</p>
+                            <small class="target-strategy-desc">${s.description}</small>
                         </div>
-                        <span style="background:${s.riskColor}; color:#000; padding:3px 8px; border-radius:4px; font-size:0.65rem; font-weight:bold; white-space:nowrap;">${s.risk} RISK</span>
+                        <span class="target-risk-pill" style="--pill-color:${s.riskColor};">${s.risk} RISK</span>
                     </div>
-                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px;">
-                        <div style="background:rgba(52,211,153,0.1); padding:6px 8px; border-radius:6px; border:1px solid rgba(52,211,153,0.3);">
-                            <small style="color:var(--text-dim); font-size:0.65rem;">Target A's</small>
-                            <p style="margin:2px 0; font-weight:bold; color:#34d399;">${s.aUnits} units</p>
+                    <div class="target-split-grid">
+                        <div class="target-split-box a">
+                            <small class="target-metric-label tiny">Target A's</small>
+                            <p class="target-split-value a">${s.aUnits} units</p>
                         </div>
-                        <div style="background:rgba(96,165,250,0.1); padding:6px 8px; border-radius:6px; border:1px solid rgba(96,165,250,0.3);">
-                            <small style="color:var(--text-dim); font-size:0.65rem;">Max B's</small>
-                            <p style="margin:2px 0; font-weight:bold; color:#60a5fa;">${s.bUnits} units</p>
+                        <div class="target-split-box b">
+                            <small class="target-metric-label tiny">Max B's</small>
+                            <p class="target-split-value b">${s.bUnits} units</p>
                         </div>
                     </div>
                 </div>
@@ -802,41 +811,41 @@ function calculateTarget() {
                 </div>
             </div>
 
-            <div style="background:#1c2128; padding:12px; border-radius:12px; border:1px solid #30363d; margin-bottom:16px;">
-                <h4 style="font-size:0.85rem; color:var(--accent); margin-bottom:10px;">🎯 YOUR PERFORMANCE PROFILE</h4>
+            <div class="target-profile-card">
+                <h4 class="target-profile-title">🎯 YOUR PERFORMANCE PROFILE</h4>
         `;
         
         if(weakSubjectCodes.length > 0) {
             html += `
-                <div style="margin-bottom:10px;">
-                    <small style="color:var(--text-dim); display:block; margin-bottom:4px;">⚠️ Subjects That Needed Improvement:</small>
-                    <p style="margin:0; font-size:0.8rem; color:#ff6b6b;"><b>${weakSubjectCodes.join(', ')}</b><br><small>These courses historically challenged you. Plan extra study time.</small></p>
+                <div class="target-profile-block">
+                    <small class="target-micro-label">⚠️ Subjects That Needed Improvement:</small>
+                    <p class="target-profile-copy weak"><b>${weakSubjectCodes.join(', ')}</b><br><small>These courses historically challenged you. Plan extra study time.</small></p>
                 </div>
             `;
         }
         
         if(strongSubjectCodes.length > 0) {
             html += `
-                <div style="margin-bottom:10px;">
-                    <small style="color:var(--text-dim); display:block; margin-bottom:4px;">✅ Your Strength Areas:</small>
-                    <p style="margin:0; font-size:0.8rem; color:#34d399;"><b>${strongSubjectCodes.join(', ')}</b><br><small>Leverage these strengths and master similar course types.</small></p>
+                <div class="target-profile-block">
+                    <small class="target-micro-label">✅ Your Strength Areas:</small>
+                    <p class="target-profile-copy strong"><b>${strongSubjectCodes.join(', ')}</b><br><small>Leverage these strengths and master similar course types.</small></p>
                 </div>
             `;
         }
         
         html += `
-                <small style="color:var(--text-dim); display:block; margin-top:8px;">Performance Variance: <b>${variance.toFixed(2)}</b> (0=perfect consistency, 2+=highly variable)</small>
+                <small class="target-variance-note">Performance Variance: <b>${variance.toFixed(2)}</b> (0=perfect consistency, 2+=highly variable)</small>
             </div>
 
-            <div style="background:rgba(96, 165, 250, 0.05); padding:12px; border-radius:8px; border-left:3px solid #60a5fa; margin-bottom:16px;">
-                <p style="font-size:0.8rem; color:#e6edf3; line-height:1.5; margin:0;">
+            <div class="target-reco-card">
+                <p class="target-alert-copy">
                     <b>💡 Smart Recommendation:</b> Start with the <b>Safe Path</b> (${scenarios[0].aUnits} A's). This gives you breathing room. 
                     Once you ace your first 2-3 exams this semester, you can reassess and pivot to Balanced or even Minimum if needed.
                 </p>
             </div>
 
-            <div style="background:rgba(255, 191, 0, 0.05); padding:12px; border-radius:8px; border-left:3px solid #fbbf24;">
-                <p style="font-size:0.75rem; color:#e6edf3; line-height:1.5; margin:0;">
+            <div class="target-critical-card">
+                <p class="target-critical-copy">
                     <b>🚨 Critical:</b> High-unit courses (4+ units) are leverage points. Securing an A in one 4-unit course equals securing A's in two 2-unit courses. 
                     Prioritize ${coursesByUnit.ultraHard.length > 0 ? 'high-unit courses' : 'strategic course selection'}.
                 </p>
@@ -845,9 +854,8 @@ function calculateTarget() {
     }
 
     html += `
-        <div style="margin-top:25px; border-top:1px solid #30363d; padding-top:15px; text-align:center;">
-            <button onclick="document.getElementById('goal-input').focus();" 
-                    style="background:transparent; border:1px solid var(--accent); color:var(--accent); padding:8px 20px; border-radius:8px; font-size:0.8rem; font-weight:600; cursor:pointer;">
+        <div class="target-footer-actions">
+            <button onclick="document.getElementById('goal-input').focus();" class="target-adjust-btn">
                 Adjust Target CGPA
             </button>
         </div>

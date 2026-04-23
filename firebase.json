@@ -1,36 +1,56 @@
 {
   "hosting": {
     "public": ".",
-    "cleanUrls": true,
+    "cleanUrls": false,
+    "headers": [
+      {
+        "source": "**/*.html",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache, no-store, must-revalidate"
+          }
+        ]
+      },
+      {
+        "source": "**/sw.js",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache, no-store, must-revalidate"
+          }
+        ]
+      }
+    ],
     "redirects": [
       {
-        "source": "/cgpa-calculator",
-        "destination": "/cgpa_calculator/index.html",
+        "source": "cgpa-calculator",
+        "destination": "cgpa_calculator/index.html",
         "type": 301
       },
       {
-        "source": "/cgpa-calculator-guide",
-        "destination": "/cgpa_calculator/academic_guide.html",
+        "source": "cgpa-calculator-guide",
+        "destination": "cgpa_calculator/academic_guide.html",
         "type": 301
       },
       {
-        "source": "/jamb-cut-off-marks-guide",
-        "destination": "/jamb-cut-off-marks-guide.html",
+        "source": "jamb-cut-off-marks-guide",
+        "destination": "jamb-cut-off-marks-guide.html",
         "type": 301
       },
       {
-        "source": "/waec-grading-system-guide",
-        "destination": "/waec-grading-system-guide.html",
+        "source": "waec-grading-system-guide",
+        "destination": "waec-grading-system-guide.html",
         "type": 301
       },
       {
-        "source": "/post-utme-preparation-guide",
-        "destination": "/post-utme-preparation-guide.html",
+        "source": "post-utme-preparation-guide",
+        "destination": "post-utme-preparation-guide.html",
         "type": 301
       },
       {
-        "source": "/how-to-improve-cgpa-fast",
-        "destination": "/how-to-improve-cgpa-fast.html",
+        "source": "how-to-improve-cgpa-fast",
+        "destination": "how-to-improve-cgpa-fast.html",
         "type": 301
       }
     ],
